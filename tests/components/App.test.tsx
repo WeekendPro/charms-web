@@ -6,8 +6,6 @@ vi.mock('../../src/lib/auth', () => ({
   getUser: vi.fn().mockResolvedValue({ data: { user: null } }),
   signOut: vi.fn(),
 }))
-// Keep the journey screen from hitting the network in this routing test.
-vi.mock('../../src/lib/api', () => ({ getJourney: vi.fn().mockResolvedValue([]) }))
 import * as auth from '../../src/lib/auth'
 import App from '../../src/App'
 import { useNavStore } from '../../src/store/navStore'

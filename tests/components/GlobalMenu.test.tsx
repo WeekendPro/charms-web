@@ -11,61 +11,29 @@ vi.mock('../../src/lib/auth', () => ({
 import * as auth from '../../src/lib/auth'
 import { GlobalMenu } from '../../src/components/GlobalMenu'
 import { useNavStore } from '../../src/store/navStore'
-import { useGameStore } from '../../src/store/gameStore'
-import { useSettingsStore } from '../../src/store/settingsStore'
 
 beforeEach(() => {
   useNavStore.getState().reset()
-  useGameStore.getState().resetGame()
-  useSettingsStore.setState({ settings: { hideBriefing: {}, mapStyle: 'transit', difficulty: 'easy' } })
   vi.clearAllMocks()
 })
 
 describe('GlobalMenu', () => {
-  it('is simplified to Settings / Reset Journey / Logout (no modes or maps)', async () => {
-    useNavStore.setState({ appView: 'journey' })
+  it('is simplified to Settings / Logout (no modes, maps, or game controls)', async () => {
+    useNavStore.setState({ appView: 'home' })
     const user = userEvent.setup()
     render(<GlobalMenu />)
     await user.click(screen.getByRole('button', { name: /menu/i }))
     expect(screen.getByRole('button', { name: /Settings/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /Reset Journey/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /Logout/i })).toBeInTheDocument()
-    // Game modes and map styles now live on the Home landing page, not the menu.
+    // Game modes, maps, and the old in-game pause controls are gone.
+    expect(screen.queryByRole('button', { name: /Reset Journey/i })).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /Training Mode/i })).not.toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: /Infinite Stagger/i })).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /Subway Map/i })).not.toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: /Git Map/i })).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /Resume/i })).not.toBeInTheDocument()
   })
 
-  it('in game shows Resume + Quit and pauses on open, resumes on Resume', async () => {
-    useNavStore.setState({ appView: 'practice' })
-    useGameStore.setState({ phase: 'viewing', phaseStartTime: Date.now(), phaseDuration: 10000 })
-    const user = userEvent.setup()
-    render(<GlobalMenu />)
-
-    await user.click(screen.getByRole('button', { name: /menu/i }))
-    expect(useGameStore.getState().paused).toBe(true)
-    expect(screen.getByRole('button', { name: /Resume/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /Exit Training Mode/i })).toBeInTheDocument()
-
-    await user.click(screen.getByRole('button', { name: /Resume/i }))
-    expect(useGameStore.getState().paused).toBe(false)
-  })
-
-  it('Exit resets the game and navigates to Home', async () => {
-    useNavStore.setState({ appView: 'practice' })
-    useGameStore.setState({ phase: 'viewing', round: 4 })
-    const user = userEvent.setup()
-    render(<GlobalMenu />)
-    await user.click(screen.getByRole('button', { name: /menu/i }))
-    await user.click(screen.getByRole('button', { name: /Exit Training Mode/i }))
-    expect(useNavStore.getState().appView).toBe('home')
-    expect(useGameStore.getState().paused).toBe(false)
-  })
-
   it('Logout calls signOut and resets navigation', async () => {
-    useNavStore.setState({ appView: 'journey' })
+    useNavStore.setState({ appView: 'home' })
     const user = userEvent.setup()
     render(<GlobalMenu />)
     await user.click(screen.getByRole('button', { name: /menu/i }))

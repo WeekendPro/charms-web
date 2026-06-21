@@ -12,7 +12,7 @@ import { useStaggerStore } from '../../src/store/staggerStore'
 
 beforeEach(() => {
   useNavStore.getState().reset()
-  useSettingsStore.setState({ settings: { hideBriefing: {}, mapStyle: 'transit', difficulty: 'easy' } })
+  useSettingsStore.setState({ settings: { difficulty: 'easy' } })
   useStaggerStore.getState().exit()
   vi.clearAllMocks()
 })

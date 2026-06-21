@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getUser, signOut } from '../lib/auth'
 import { useNavStore } from '../store/navStore'
-import { useGameStore } from '../store/gameStore'
-import { useProgressStore } from '../store/progressStore'
-import { useShallow } from 'zustand/shallow'
 import { ScanlineOverlay } from './ui'
 
 interface MenuUser {
@@ -45,21 +42,8 @@ function Action({ label, onClick, tone = 'default' }:
 }
 
 export function GlobalMenu() {
-  const appView = useNavStore(s => s.appView)
-  const { goHome, reset: resetNav } = useNavStore(useShallow(s => ({
-    goHome: s.goHome,
-    reset: s.reset,
-  })))
-  const { pauseGame, resumeGame, resetGame } = useGameStore(useShallow(s => ({
-    pauseGame: s.pauseGame,
-    resumeGame: s.resumeGame,
-    resetGame: s.resetGame,
-  })))
-  const resetProgress = useProgressStore(s => s.resetProgress)
+  const resetNav = useNavStore(s => s.reset)
 
-  // Stagger runs its own pause/exit, so the only in-game hosts here are the
-  // Journey/Practice round shells.
-  const inGame = appView === 'playing' || appView === 'practice'
   const [open, setOpen] = useState(false)
   const [user, setUser] = useState<MenuUser | null>(null)
 
@@ -80,8 +64,7 @@ export function GlobalMenu() {
     return () => { cancelled = true }
   }, [])
 
-  const openMenu = () => { if (inGame) pauseGame(); setOpen(true) }
-  const close = () => { if (inGame) resumeGame(); setOpen(false) }
+  const close = () => setOpen(false)
 
   useEffect(() => {
     if (!open) return
@@ -90,21 +73,12 @@ export function GlobalMenu() {
     return () => document.removeEventListener('keydown', onKey)
   })
 
-  const quitToHome = () => { setOpen(false); resetGame(); goHome() }
   const handleSignOut = async () => { setOpen(false); await signOut(); resetNav() }
-  // Admin/dev: wipe all saved scores so the journey starts fresh at level 1.
-  const resetJourney = () => {
-    if (!window.confirm('Reset Journey? This permanently wipes all level progress and scores.')) return
-    setOpen(false)
-    resetProgress()
-    resetGame()
-    goHome()
-  }
 
   return (
     <>
       <button
-        onClick={open ? close : openMenu}
+        onClick={open ? close : () => setOpen(true)}
         aria-label="Menu"
         aria-expanded={open}
         className="fixed top-3 right-3 z-50 grid place-items-center w-10 h-10 rounded-xl
@@ -126,9 +100,6 @@ export function GlobalMenu() {
         <div className="fixed inset-0 z-40 flex flex-col px-7 pt-20 pb-8 text-vt-text
           bg-gradient-to-b from-vt-void via-vt-grid to-vt-panel">
           <ScanlineOverlay />
-          {inGame && (
-            <div className="font-pixel text-[9px] uppercase tracking-[0.2em] text-vt-cyan mb-1">Paused</div>
-          )}
           {user && (
             <div className="flex items-center gap-3 mb-8">
               <Avatar user={user} />
@@ -141,19 +112,8 @@ export function GlobalMenu() {
             </div>
           )}
 
-          {inGame && (
-            <>
-              <Action label="Resume" onClick={close} />
-              <Action
-                label={appView === 'practice' ? 'Exit Training Mode' : 'Exit to Home'}
-                onClick={quitToHome}
-              />
-            </>
-          )}
-
           <div className="mt-auto">
             <Action label="Settings" tone="muted" onClick={() => setOpen(false)} />
-            <Action label="Reset Journey" tone="danger" onClick={resetJourney} />
             <Action label="Logout" tone="danger" onClick={handleSignOut} />
           </div>
         </div>

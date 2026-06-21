@@ -4,10 +4,6 @@ import { getSession } from './lib/auth'
 import { useNavStore } from './store/navStore'
 import { AuthScreen } from './components/AuthScreen'
 import { HomeScreen } from './components/HomeScreen'
-import { JourneyScreen } from './components/JourneyScreen'
-import { LevelScreen } from './components/LevelScreen'
-import { ResultsScreen } from './components/ResultsScreen'
-import { GameShell } from './components/GameShell'
 import { StaggerScreen } from './components/StaggerScreen'
 import { GlobalLoadingOverlay } from './components/GlobalLoadingOverlay'
 import { GlobalMenu } from './components/GlobalMenu'
@@ -35,13 +31,7 @@ export default function App() {
     switch (appView) {
       case 'auth': return <AuthScreen />
       case 'home': return <HomeScreen />
-      case 'journey': return <JourneyScreen />
-      case 'levelDetail': return <LevelScreen />
-      case 'results': return <ResultsScreen />
       case 'stagger': return <StaggerScreen />
-      case 'playing':
-      case 'practice':
-        return <GameShell />
       default: return <AuthScreen />
     }
   })()
