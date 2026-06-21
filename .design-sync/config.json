@@ -1,0 +1,16 @@
+{
+  "approach": "path-a-preview-cards",
+  "shape": "off-script",
+  "note": "Design system is HTML mockups + tokens, not a buildable component library. No dist/, no Storybook. Sync the @dsCard-marked preview HTML directly as cards (the standard converter does not apply). See .design-sync/NOTES.md.",
+  "proposedProjectName": "Charms — Sherbet",
+  "bundleDir": "mockups/sherbet/charms",
+  "cards": [
+    "mockups/sherbet/charms/00-foundations.html",
+    "mockups/sherbet/charms/01-auth.html",
+    "mockups/sherbet/charms/02-home.html",
+    "mockups/sherbet/charms/03-countdown.html",
+    "mockups/sherbet/charms/04-glimpse.html",
+    "mockups/sherbet/charms/05-find.html",
+    "mockups/sherbet/charms/06-gameover.html"
+  ]
+}
