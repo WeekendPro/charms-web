@@ -67,7 +67,7 @@ export function HomeScreen() {
   const activeHint = DIFFICULTIES.find(d => d.value === difficulty)?.hint
 
   return (
-    <div className="relative min-h-dvh overflow-hidden bg-arcade-glow text-white arcade-scanlines">
+    <div className="relative min-h-dvh overflow-hidden bg-arcade-glow text-vt-text">
       <ScanlineOverlay />
 
       <div

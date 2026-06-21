@@ -32,12 +32,13 @@ const FLOAT_TEXT_SHADOW = '0 2px 5px rgba(0,0,0,0.85), 0 1px 2px rgba(0,0,0,0.95
  *  L=orange-400). On EASY, gaps bloom in their own piece color during reveal so
  *  the player can track shape AND color, easing the memory load. */
 const PIECE_BLOOM_HEX: Record<PieceType, string> = {
-  I: '#22d3ee', O: '#facc15', T: '#a855f7', S: '#4ade80', Z: '#ef4444', J: '#3b82f6', L: '#fb923c',
+  // Sherbet candy hues (match @shared/engine/pieces).
+  I: '#1FC7B6', O: '#FFCE3A', T: '#9B8CFF', S: '#5BC16E', Z: '#FF6B6B', J: '#46AEF7', L: '#FF9E45',
 }
 
-/** The uniform branded pink the reveal floods on MEDIUM (the signature Afterglow
- *  magenta — shape only, no colour crutch). */
-const REVEAL_MAGENTA = '#FF2D9B'
+/** The uniform branded pink the reveal floods on MEDIUM (Sherbet bubblegum —
+ *  shape only, no colour crutch). */
+const REVEAL_MAGENTA = '#FF8FCF'
 
 /** A bloom instance: one tetromino lit at a single tick, with a per-cell decay
  *  DURATION that lengthens along the board diagonal (r+c) so the four cells flash
@@ -101,7 +102,7 @@ function StaggerBoard({
 
   return (
     <div
-      className="inline-grid gap-[2px] p-3 bg-[#04040a] rounded-xl shadow-[inset_0_2px_6px_#000,inset_0_0_0_1px_rgba(255,255,255,0.03)]"
+      className="inline-grid gap-[2px] p-3 bg-vt-grid rounded-[26px] shadow-panel-inset"
       style={{ gridTemplateColumns: `repeat(${COLS}, ${CELL}px)` }}
     >
       {Array.from({ length: ROWS * COLS }, (_, i) => {
@@ -118,7 +119,7 @@ function StaggerBoard({
               initial={{ scale: 0.5, opacity: 0.4 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.22, ease: 'easeOut' }}
-              className={`w-7 h-7 rounded-sm ${getPieceColor(piece)} ring-1 ring-white/25 shadow-[0_0_8px_rgba(255,255,255,0.25)]`}
+              className={`w-7 h-7 rounded-md ${getPieceColor(piece)} shadow-[0_4px_10px_rgba(217,150,120,0.25),inset_0_2px_0_rgba(255,255,255,0.45)]`}
             />
           )
         }

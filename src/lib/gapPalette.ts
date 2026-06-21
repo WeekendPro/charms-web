@@ -1,26 +1,25 @@
 // Maps a palette id (stored on Gap.color) to literal Tailwind classes.
 // Kept client-side so shared logic never references Tailwind class strings.
 
-// Five neon hues for color-coded rounds, drawn from the arcade brand palette
-// (see tailwind.config.js). The goal is recall, not trickery — so the set spans
-// the wheel (cool cyan, pink magenta, green, violet purple, warm yellow) and
-// deliberately omits a neon red, whose closeness to magenta made the warm pair
-// hard to tell apart under time pressure. Keep BORDER and FILL on the same hex
-// per id so a gap's dashed outline matches its filled piece.
+// Five Sherbet candy hues for color-coded rounds (see mockups/sherbet/tokens.css).
+// The goal is recall, not trickery — so the set spans the wheel (sky, bubblegum,
+// lime, grape, lemon) and is spread across LIGHTNESS as well as hue for
+// colour-blind safety. Keep BORDER and FILL on the same hex per id so a gap's
+// dashed outline matches its filled piece.
 const BORDER: Record<string, string> = {
-  cyan: 'border-[#22d3ee]',
-  magenta: 'border-[#ff2d95]',
-  green: 'border-[#39d98a]',
-  purple: 'border-[#a855f7]',
-  yellow: 'border-[#facc15]',
+  cyan: 'border-[#46AEF7]',   // sky
+  magenta: 'border-[#FF8FCF]', // bubblegum
+  green: 'border-[#5BC16E]',  // lime
+  purple: 'border-[#9B8CFF]', // grape
+  yellow: 'border-[#FFCE3A]', // lemon
 }
 
 const FILL: Record<string, string> = {
-  cyan: 'bg-[#22d3ee]',
-  magenta: 'bg-[#ff2d95]',
-  green: 'bg-[#39d98a]',
-  purple: 'bg-[#a855f7]',
-  yellow: 'bg-[#facc15]',
+  cyan: 'bg-[#46AEF7]',
+  magenta: 'bg-[#FF8FCF]',
+  green: 'bg-[#5BC16E]',
+  purple: 'bg-[#9B8CFF]',
+  yellow: 'bg-[#FFCE3A]',
 }
 
 /** Border-color class for a gap's palette id (falls back to a neutral border). */

@@ -3,12 +3,11 @@ import { render, screen } from '@testing-library/react'
 import { Wordmark } from '../../../src/components/ui/Wordmark'
 
 describe('Wordmark', () => {
-  it('renders VANISHING TILES as a bold heading with cyan-glow classes', () => {
+  it('renders VANISHING TILES as a bold heading in Sherbet ink', () => {
     render(<Wordmark />)
     const h = screen.getByRole('heading', { name: /vanishing tiles/i })
     expect(h.className).toContain('font-bold')
-    expect(h.className).toContain('text-glow-cyan')
-    expect(h.className).toContain('text-white')
+    expect(h.className).toContain('text-vt-text')
   })
 
   it('applies the lg size class when size="lg"', () => {

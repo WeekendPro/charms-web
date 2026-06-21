@@ -22,7 +22,7 @@ export function Grid({ onCellClick, onCellHover, highlightCells = [], cellRef }:
 
   return (
     <div
-      className="inline-grid gap-[2px] p-3 bg-gray-900 rounded-xl"
+      className="inline-grid gap-[2px] p-3 bg-vt-grid rounded-[26px] shadow-panel-inset"
       style={{ gridTemplateColumns: `repeat(${COLS}, 28px)` }}
     >
       {Array.from({ length: ROWS * COLS }, (_, i) => {
@@ -31,25 +31,25 @@ export function Grid({ onCellClick, onCellHover, highlightCells = [], cellRef }:
         const cell = grid[row]?.[col]
         const isHighlight = highlighted.has(`${row},${col}`)
 
-        let className = 'w-7 h-7 rounded-sm '
+        let className = 'w-7 h-7 rounded-md '
         if (cell?.status === 'filled') {
-          className += BOARD_STYLE === 'empty' ? 'bg-slate-800/50' : 'bg-slate-600'
+          className += BOARD_STYLE === 'empty' ? 'bg-vt-filled/60' : 'bg-vt-filled'
         } else if (cell?.status === 'placed' && cell.pieceType) {
           className += cell.color ? gapFillClass(cell.color) : getPieceColor(cell.pieceType)
         } else if (cell?.status === 'preview') {
-          className += 'bg-blue-400/50 border-2 border-blue-400'
+          className += 'bg-[#46AEF7]/45 border-2 border-[#46AEF7]'
         } else if (isHighlight) {
-          className += 'bg-blue-400/50 border-2 border-blue-400'
+          className += 'bg-[#46AEF7]/45 border-2 border-[#46AEF7]'
         } else {
           // empty cell (gap) — render as a TRUE hole: no fill, no per-cell border.
           // A multi-cell gap then reads as one empty region defined solely by the
-          // dashed GapBorder silhouette, instead of N visible blocks that look like
-          // dark placed pieces. (The dark grid background shows through.)
+          // dashed GapBorder silhouette, instead of N visible blocks. (The warm
+          // board well shows through.)
           className += 'bg-transparent'
         }
 
         if (onCellClick && cell?.status === 'empty') {
-          className += ' cursor-pointer hover:bg-blue-400/30'
+          className += ' cursor-pointer hover:bg-[#46AEF7]/25'
         }
 
         return (

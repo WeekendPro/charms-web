@@ -4,55 +4,65 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Remapped to Sherbet candy so every legacy neon-* class becomes friendly.
         neon: {
-          cyan: '#22d3ee',
-          magenta: '#ff2d95',
-          green: '#39d98a',
-          red: '#ff4d4d',
-          yellow: '#facc15',
+          cyan: '#46AEF7',    // sky
+          magenta: '#FF8FCF', // bubblegum
+          green: '#2FD09B',   // mint
+          red: '#FF6B81',     // coral
+          yellow: '#FFCE3A',  // lemon
         },
+        // Remapped to light surfaces (bg = warm ink, used as text-on-bright-pill).
         arcade: {
-          bg: '#030712',
-          panel: '#060d12',
-          edge: '#0e2b33',
-          well: '#0c1f25',
+          bg: '#46383B',   // warm-charcoal ink (text-arcade-bg on bright pills)
+          panel: '#FFFFFF', // button / switch surface
+          edge: '#F0E0D4',  // hairline
+          well: '#FFF1E8',  // sunken
         },
-        // ── Afterglow (Vanishing Tiles) semantic palette ──
+        // ── Sherbet (Vanishing Tiles) semantic palette ──
+        // Names kept (void/panel/magenta/cyan…) so existing vt-* classes flip in
+        // place; values are Sherbet. Grounds go light, ink goes warm-charcoal,
+        // accents become candy. See mockups/sherbet/tokens.css for the source.
         vt: {
-          void: '#06060B',
-          panel: '#0E0E16',
-          raised: '#15151F',
-          grid: '#1C1C28',
-          filled: '#2A2D3A',
-          edge: '#3A3E4F',
-          magenta: '#FF2D9B', // memory / the gap
-          cyan: '#28F0FF',    // system / active
-          amber: '#FFC23D',   // time / score
-          red: '#FF3B47',     // danger / miss
-          lime: '#B6FF3C',    // success / streak
-          text: '#EAEAF2',
-          dim: '#8A8AA0',
-          faint: '#4A4A5C',
+          void: '#FFF7F0',    // page ground (was near-black)
+          panel: '#FFFFFF',   // cards / surfaces
+          raised: '#FFFFFF',  // raised surface
+          grid: '#FBEFE6',    // board well
+          filled: '#FFF1E8',  // sunken slot
+          edge: '#F0E0D4',    // hairline
+          magenta: '#FF8FCF', // memory / the gap  → bubblegum
+          cyan: '#46AEF7',    // system / active   → sky
+          amber: '#FFB13C',   // time / score      → warm amber
+          red: '#FF6B81',     // danger / miss     → friendly coral
+          lime: '#2FD09B',    // success / streak  → mint
+          text: '#46383B',    // warm charcoal ink
+          dim: '#9B8B8E',
+          faint: '#CDBFC1',
         },
       },
       boxShadow: {
-        'neon-cyan': '0 0 8px rgba(34,211,238,0.55), 0 0 2px rgba(255,255,255,0.6) inset',
-        'neon-magenta': '0 0 8px rgba(255,45,149,0.55)',
-        'neon-green': '0 0 8px rgba(57,217,138,0.5)',
-        'neon-red': '0 0 8px rgba(255,77,77,0.5)',
-        'panel-inset': 'inset 0 0 14px rgba(0,0,0,0.6)',
-        'vt-cyan': '0 0 6px #28F0FF, 0 0 22px rgba(40,240,255,0.45)',
-        'vt-magenta': '0 0 6px #FF2D9B, 0 0 22px rgba(255,45,155,0.45)',
-        'vt-amber': '0 0 6px #FFC23D, 0 0 22px rgba(255,194,61,0.45)',
-        'vt-red': '0 0 6px #FF3B47, 0 0 22px rgba(255,59,71,0.45)',
-        'vt-lime': '0 0 6px #B6FF3C, 0 0 22px rgba(182,255,60,0.45)',
+        'neon-cyan': '0 4px 10px rgba(70,174,247,0.25)',
+        'neon-magenta': '0 4px 10px rgba(255,143,207,0.25)',
+        'neon-green': '0 4px 10px rgba(47,208,155,0.25)',
+        'neon-red': '0 4px 10px rgba(255,107,129,0.25)',
+        'panel-inset': 'inset 0 2px 8px rgba(180,120,90,0.14)',
+        // Soft warm candy elevation — replaces the old neon halos.
+        'vt-cyan': '0 6px 14px rgba(70,174,247,0.28)',
+        'vt-magenta': '0 6px 14px rgba(255,143,207,0.30)',
+        'vt-amber': '0 6px 14px rgba(255,177,60,0.30)',
+        'vt-red': '0 6px 14px rgba(255,107,129,0.30)',
+        'vt-lime': '0 6px 14px rgba(47,208,155,0.30)',
+        'vt-tile': '0 6px 14px rgba(217,150,120,0.22)',
+        'vt-pop': '0 14px 30px rgba(214,140,110,0.26)',
       },
       fontFamily: {
-        pixel: ['"Space Grotesk"', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['"Space Grotesk"', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
-        silk: ['"Space Grotesk"', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        grotesk: ['"Space Grotesk"', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        // Sherbet pairing: Fredoka (display) + Nunito (UI). Old aliases remapped
+        // so existing font-pixel/grotesk/silk usages become rounded & friendly.
+        pixel: ['"Fredoka"', 'ui-rounded', 'system-ui', 'sans-serif'],
+        display: ['"Fredoka"', 'ui-rounded', 'system-ui', 'sans-serif'],
+        sans: ['"Nunito"', 'ui-rounded', 'system-ui', '-apple-system', 'sans-serif'],
+        silk: ['"Fredoka"', 'ui-rounded', 'system-ui', 'sans-serif'],
+        grotesk: ['"Fredoka"', 'ui-rounded', 'system-ui', 'sans-serif'],
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
     },

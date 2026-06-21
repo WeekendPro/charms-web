@@ -19,7 +19,7 @@ export function Wordmark({ size = 'sm', as: Tag = 'h1', stacked = false, classNa
   return (
     <Tag
       className={[
-        'font-pixel font-bold uppercase tracking-[0.05em] leading-none text-white text-glow-cyan',
+        'font-pixel font-bold uppercase tracking-[0.05em] leading-none text-vt-text',
         SIZE[size],
         className,
       ]

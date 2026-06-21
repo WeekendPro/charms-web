@@ -1,13 +1,15 @@
 import type { PieceCells, PieceDefinition, PieceType, Rotation } from '../types.ts'
 
+// Colours are Sherbet candy hues (see mockups/sherbet/tokens.css) as literal
+// Tailwind arbitrary-value classes so each piece reads as a distinct candy tile.
 export const PIECE_DEFINITIONS: PieceDefinition[] = [
-  { type: 'I', color: 'bg-cyan-400',   cells: [[0,0],[0,1],[0,2],[0,3]] },
-  { type: 'O', color: 'bg-yellow-400', cells: [[0,0],[0,1],[1,0],[1,1]] },
-  { type: 'T', color: 'bg-purple-500', cells: [[0,0],[0,1],[0,2],[1,1]] },
-  { type: 'S', color: 'bg-green-400',  cells: [[0,1],[0,2],[1,0],[1,1]] },
-  { type: 'Z', color: 'bg-red-500',    cells: [[0,0],[0,1],[1,1],[1,2]] },
-  { type: 'J', color: 'bg-blue-500',   cells: [[0,0],[1,0],[1,1],[1,2]] },
-  { type: 'L', color: 'bg-orange-400', cells: [[0,2],[1,0],[1,1],[1,2]] },
+  { type: 'I', color: 'bg-[#1FC7B6]', cells: [[0,0],[0,1],[0,2],[0,3]] }, // teal
+  { type: 'O', color: 'bg-[#FFCE3A]', cells: [[0,0],[0,1],[1,0],[1,1]] }, // lemon
+  { type: 'T', color: 'bg-[#9B8CFF]', cells: [[0,0],[0,1],[0,2],[1,1]] }, // grape
+  { type: 'S', color: 'bg-[#5BC16E]', cells: [[0,1],[0,2],[1,0],[1,1]] }, // lime
+  { type: 'Z', color: 'bg-[#FF6B6B]', cells: [[0,0],[0,1],[1,1],[1,2]] }, // strawberry
+  { type: 'J', color: 'bg-[#46AEF7]', cells: [[0,0],[1,0],[1,1],[1,2]] }, // sky
+  { type: 'L', color: 'bg-[#FF9E45]', cells: [[0,2],[1,0],[1,1],[1,2]] }, // tangerine
 ]
 
 function normalizeCells(cells: PieceCells): PieceCells {
