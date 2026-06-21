@@ -1,0 +1,177 @@
+<!-- @dsCard group="Gameplay" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charms · Find</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --vt-bg:#FFF7F0; --vt-bg-board:#FBEFE6; --vt-surface:#FFFFFF; --vt-surface-2:#FFF1E8;
+  --vt-hairline:#F0E0D4; --vt-ink:#46383B; --vt-ink-soft:#9B8B8E; --vt-ink-faint:#CDBFC1;
+  --vt-strawberry:#FF6B6B; --vt-tangerine:#FF9E45; --vt-lemon:#FFCE3A; --vt-lime:#5BC16E;
+  --vt-teal:#1FC7B6; --vt-sky:#46AEF7; --vt-grape:#9B8CFF; --vt-bubblegum:#FF8FCF;
+  --vt-life:#FF6B81; --vt-success:#2FD09B; --vt-star:#FFCE3A;
+  --vt-combo-a:#FF6B6B; --vt-combo-b:#FFA94D; --vt-timer-warn:#FFB13C; --vt-timer-hot:#FF8A5B;
+  --vt-shadow-2:0 6px 14px rgba(217,150,120,.22); --vt-shadow-3:0 14px 30px rgba(214,140,110,.26);
+  --vt-inset-top:inset 0 2px 0 rgba(255,255,255,.6); --vt-spring:cubic-bezier(.18,1.3,.4,1);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#EFE4DA;font-family:'Nunito',sans-serif;color:var(--vt-ink);
+  min-height:100vh;display:grid;place-items:center;padding:20px}
+.phone{width:390px;max-width:100%;background:var(--vt-bg);border-radius:42px;
+  box-shadow:var(--vt-shadow-3);padding:18px 16px 22px;position:relative;overflow:hidden;min-height:760px}
+
+/* HUD */
+.hud{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 4px 12px}
+.score{font-family:'Fredoka';font-weight:600;font-size:22px;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:6px}
+.score small{font-family:'Nunito';font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--vt-ink-soft)}
+.lvl-pill{font-family:'Fredoka';font-weight:600;font-size:14px;background:var(--vt-surface);padding:6px 14px;border-radius:999px;box-shadow:var(--vt-shadow-2),var(--vt-inset-top)}
+.lives{display:flex;gap:5px}
+.heart{width:20px;height:20px;color:var(--vt-life);filter:drop-shadow(0 2px 2px rgba(255,107,129,.4))}
+.heart.lost{color:var(--vt-ink-faint);filter:none;transform:scale(.82)}
+
+/* combo + find clock */
+.row{display:flex;align-items:center;gap:10px;margin:2px 6px 14px}
+.combo{font-family:'Fredoka';font-weight:600;font-size:15px;
+  background:linear-gradient(90deg,var(--vt-combo-a),var(--vt-combo-b));-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+.combo .x{font-size:19px}
+.cmeter{flex:1;height:10px;border-radius:999px;background:var(--vt-surface-2);overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,.06)}
+.cmeter i{display:block;height:100%;width:72%;border-radius:999px;background:linear-gradient(90deg,var(--vt-combo-a),var(--vt-combo-b))}
+.clock{font-family:'Fredoka';font-weight:600;font-size:14px;color:var(--vt-timer-warn);display:flex;align-items:center;gap:5px}
+.ring{width:18px;height:18px;border-radius:999px;background:conic-gradient(var(--vt-timer-warn) 200deg,#F3E2D6 0)}
+
+/* the Case */
+.case{background:var(--vt-bg-board);border-radius:30px;padding:16px;
+  box-shadow:inset 0 2px 10px rgba(180,120,90,.16);
+  display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.setting{aspect-ratio:1;border-radius:50%;background:var(--vt-surface-2);border:1px solid var(--vt-hairline);
+  box-shadow:inset 0 2px 4px rgba(180,120,90,.14),inset 0 -1px 0 rgba(255,255,255,.5);position:relative}
+
+/* charm settled into its Setting (a good pick) */
+.charm{position:absolute;inset:0;border-radius:50%;background:linear-gradient(160deg,#FFF7EE,#ECD9C8);padding:3px;
+  box-shadow:0 6px 13px rgba(196,130,100,.30),var(--vt-inset-top)}
+.charm .enamel{width:100%;height:100%;border-radius:50%;position:relative;overflow:hidden;display:grid;place-items:center;
+  background:radial-gradient(125% 125% at 32% 24%,rgba(255,255,255,.62),rgba(255,255,255,0) 46%),var(--c,#FF6B6B);
+  box-shadow:inset 0 -6px 10px rgba(0,0,0,.18),inset 0 3px 4px rgba(255,255,255,.3)}
+.charm .gloss{position:absolute;top:9%;left:17%;width:52%;height:33%;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0));z-index:1}
+.charm .motif{position:relative;z-index:2;font-size:30px;line-height:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.16))}
+.setting.good{box-shadow:inset 0 0 0 2px rgba(47,208,155,.5),0 0 0 4px rgba(47,208,155,.22)}
+.setting.good .charm{animation:settle .5s var(--vt-spring) both}
+@keyframes settle{0%{opacity:0;transform:scale(.4)}60%{transform:scale(1.1)}100%{opacity:1;transform:scale(1)}}
+.check{position:absolute;right:-3px;top:-3px;width:24px;height:24px;border-radius:50%;background:var(--vt-success);
+  display:grid;place-items:center;box-shadow:0 3px 7px rgba(47,208,155,.5);z-index:4;animation:pop .4s var(--vt-spring) .14s both}
+.check svg{width:14px;height:14px;color:#fff}
+/* bad pick: a Setting that just got shaken — soft coral ✕, no harsh flash */
+.setting.bad{animation:shake .42s ease both;box-shadow:inset 0 0 0 2px rgba(255,107,129,.45)}
+.cross{position:absolute;right:-3px;top:-3px;width:24px;height:24px;border-radius:50%;background:#fff;
+  border:2px solid var(--vt-life);display:grid;place-items:center;box-shadow:var(--vt-shadow-2);z-index:4;
+  animation:pop .4s var(--vt-spring) both}
+.cross svg{width:12px;height:12px;color:var(--vt-life)}
+@keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(2px)}}
+
+/* Tray */
+.tray{margin-top:18px;background:var(--vt-surface);border-radius:28px;box-shadow:var(--vt-shadow-3);padding:16px 14px 18px}
+.tray h4{margin:0 0 12px;text-align:center;font-family:'Nunito';font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--vt-ink-soft)}
+.cands{display:grid;grid-template-columns:repeat(5,1fr);gap:11px}
+.cand{position:relative;aspect-ratio:1;border-radius:50%;background:linear-gradient(160deg,#FFF7EE,#ECD9C8);padding:3px;
+  box-shadow:0 6px 13px rgba(196,130,100,.28),var(--vt-inset-top);cursor:pointer;transition:transform .1s}
+.cand .enamel{width:100%;height:100%;border-radius:50%;position:relative;overflow:hidden;display:grid;place-items:center;
+  background:radial-gradient(125% 125% at 32% 24%,rgba(255,255,255,.62),rgba(255,255,255,0) 46%),var(--c);
+  box-shadow:inset 0 -6px 10px rgba(0,0,0,.18),inset 0 3px 4px rgba(255,255,255,.3)}
+.cand .gloss{position:absolute;top:9%;left:17%;width:52%;height:33%;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0));z-index:1}
+.cand .motif{position:relative;z-index:2;font-size:26px;line-height:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.16))}
+.cand:active{transform:scale(.92)}
+.cand.picked{animation:tap .5s var(--vt-spring) both;box-shadow:0 6px 13px rgba(196,130,100,.28),var(--vt-inset-top),0 0 0 5px rgba(47,208,155,.28)}
+.cand.spent{opacity:.42;filter:grayscale(.5)}
+.cand.spent::after{content:"";position:absolute;inset:0;border-radius:50%;background:rgba(255,255,255,.35)}
+.cand.miss{animation:shake .42s ease both}
+@keyframes tap{0%{transform:scale(.92)}55%{transform:scale(1.12)}100%{transform:scale(1)}}
+.hint{text-align:center;color:var(--vt-ink-soft);font-size:13px;font-weight:600;margin-top:14px}
+.hint b{color:var(--vt-success)}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="hud">
+    <div class="score">1,480<small>pts</small></div>
+    <div class="lvl-pill">Round 3</div>
+    <div class="lives">
+      <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.3-9C1 8.5 2.6 5 6 5c2 0 3.2 1.2 4 2.3C10.8 6.2 12 5 14 5c3.4 0 5 3.5 3.3 7C19 16.4 12 21 12 21z"/></svg>
+      <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.3-9C1 8.5 2.6 5 6 5c2 0 3.2 1.2 4 2.3C10.8 6.2 12 5 14 5c3.4 0 5 3.5 3.3 7C19 16.4 12 21 12 21z"/></svg>
+      <svg class="heart lost" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.3-9C1 8.5 2.6 5 6 5c2 0 3.2 1.2 4 2.3C10.8 6.2 12 5 14 5c3.4 0 5 3.5 3.3 7C19 16.4 12 21 12 21z"/></svg>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="combo">Combo <span class="x">×3</span></div>
+    <div class="cmeter"><i></i></div>
+    <div class="clock"><span class="ring"></span>0:08</div>
+  </div>
+
+  <div class="case" id="case"></div>
+
+  <div class="tray">
+    <h4>Find the charms you saw</h4>
+    <div class="cands" id="cands"></div>
+  </div>
+
+  <div class="hint">Two found — <b>nice eye!</b> Keep the combo going…</div>
+</div>
+
+<script>
+const COLORS={
+  strawberry:['#FF6B6B','#E84F58'],tangerine:['#FF9E45','#E8842F'],lemon:['#FFCE3A','#EDB31F'],
+  lime:['#5BC16E','#45A857'],teal:['#1FC7B6','#15A99A'],sky:['#46AEF7','#2E92DD'],
+  grape:['#9B8CFF','#7E6DF0'],bubblegum:['#FF8FCF','#ED74BC']
+};
+function charmHTML(col,m,cls){return '<div class="'+cls+'" style="--c:'+COLORS[col][0]+'"><span class="gloss"></span><span class="enamel" style="--c:'+COLORS[col][0]+'"><span class="motif">'+m+'</span></span></div>';}
+
+// Case: two good picks (✓) and one wrong-pick Setting (coral shake + ✕)
+const cells={
+  1:{state:'good',col:'strawberry',m:'🍓'},
+  7:{state:'good',col:'sky',m:'💧'},
+  11:{state:'bad'},
+};
+const c=document.getElementById('case');
+for(let s=0;s<25;s++){
+  const slot=document.createElement('div');slot.className='setting';
+  const cell=cells[s];
+  if(cell&&cell.state==='good'){
+    slot.classList.add('good');
+    slot.innerHTML=charmHTML(cell.col,cell.m,'charm')+'<div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div>';
+  }
+  if(cell&&cell.state==='bad'){
+    slot.classList.add('bad');
+    slot.innerHTML='<div class="cross"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div>';
+  }
+  c.appendChild(slot);
+}
+
+// Tray candidates
+const cands=[
+  {col:'lemon',m:'🍋'},
+  {col:'bubblegum',m:'🌸',picked:true},
+  {col:'grape',m:'⭐'},
+  {col:'lime',m:'🐝',spent:true},
+  {col:'tangerine',m:'🍑'},
+];
+const wrap=document.getElementById('cands');
+cands.forEach((cd,idx)=>{
+  const el=document.createElement('div');el.className='cand'+(cd.picked?' picked':'')+(cd.spent?' spent':'');
+  el.style.setProperty('--c',COLORS[cd.col][0]);
+  el.innerHTML='<span class="gloss"></span><span class="enamel" style="--c:'+COLORS[cd.col][0]+'"><span class="motif">'+cd.m+'</span></span>';
+  el.addEventListener('click',()=>{
+    if(el.classList.contains('spent'))return;
+    el.classList.remove('picked','miss');void el.offsetWidth;
+    el.classList.add(idx===4?'miss':'picked');
+  });
+  wrap.appendChild(el);
+});
+</script>
+</body>
+</html>

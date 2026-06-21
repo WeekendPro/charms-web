@@ -1,0 +1,138 @@
+<!-- @dsCard group="Gameplay" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charms · Glimpse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --vt-bg:#FFF7F0; --vt-bg-board:#FBEFE6; --vt-surface:#FFFFFF; --vt-surface-2:#FFF1E8;
+  --vt-hairline:#F0E0D4; --vt-ink:#46383B; --vt-ink-soft:#9B8B8E; --vt-ink-faint:#CDBFC1;
+  --vt-strawberry:#FF6B6B; --vt-tangerine:#FF9E45; --vt-lemon:#FFCE3A; --vt-lime:#5BC16E;
+  --vt-teal:#1FC7B6; --vt-sky:#46AEF7; --vt-grape:#9B8CFF; --vt-bubblegum:#FF8FCF;
+  --vt-life:#FF6B81; --vt-timer-calm:#46C7B6; --vt-timer-warn:#FFB13C;
+  --vt-shadow-2:0 6px 14px rgba(217,150,120,.22); --vt-shadow-3:0 14px 30px rgba(214,140,110,.26);
+  --vt-inset-top:inset 0 2px 0 rgba(255,255,255,.6); --vt-spring:cubic-bezier(.18,1.3,.4,1);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#EFE4DA;font-family:'Nunito',sans-serif;color:var(--vt-ink);
+  min-height:100vh;display:grid;place-items:center;padding:20px}
+.phone{width:390px;max-width:100%;background:var(--vt-bg);border-radius:42px;
+  box-shadow:var(--vt-shadow-3);padding:18px 16px 26px;position:relative;overflow:hidden;min-height:760px}
+
+/* HUD */
+.hud{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 4px 12px}
+.score{font-family:'Fredoka';font-weight:600;font-size:22px;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:6px}
+.score small{font-family:'Nunito';font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--vt-ink-soft)}
+.lvl-pill{font-family:'Fredoka';font-weight:600;font-size:14px;background:var(--vt-surface);padding:6px 14px;border-radius:999px;box-shadow:var(--vt-shadow-2),var(--vt-inset-top)}
+.lives{display:flex;gap:5px}
+.heart{width:20px;height:20px;color:var(--vt-life);filter:drop-shadow(0 2px 2px rgba(255,107,129,.4))}
+
+.banner{text-align:center;font-family:'Fredoka';font-weight:600;font-size:15px;margin:2px 0 10px}
+.banner b{color:var(--vt-bubblegum)}
+.timer{height:10px;border-radius:999px;background:var(--vt-surface-2);overflow:hidden;margin:0 6px 16px;box-shadow:inset 0 1px 2px rgba(0,0,0,.06)}
+.timer i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--vt-timer-calm),var(--vt-timer-warn));
+  width:70%;animation:drain 5s linear infinite}
+@keyframes drain{from{width:100%}to{width:14%}}
+
+/* the Case */
+.case{background:var(--vt-bg-board);border-radius:30px;padding:16px;
+  box-shadow:inset 0 2px 10px rgba(180,120,90,.16);
+  display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.setting{aspect-ratio:1;border-radius:50%;background:var(--vt-surface-2);border:1px solid var(--vt-hairline);
+  box-shadow:inset 0 2px 4px rgba(180,120,90,.14),inset 0 -1px 0 rgba(255,255,255,.5);position:relative}
+
+/* charm */
+.charm{position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(160deg,#FFF7EE,#ECD9C8);padding:3px;
+  box-shadow:0 6px 13px rgba(196,130,100,.30),var(--vt-inset-top);opacity:0}
+.charm .enamel{width:100%;height:100%;border-radius:50%;position:relative;overflow:hidden;display:grid;place-items:center;
+  background:radial-gradient(125% 125% at 32% 24%,rgba(255,255,255,.62),rgba(255,255,255,0) 46%),var(--c,#FF6B6B);
+  box-shadow:inset 0 -6px 10px rgba(0,0,0,.18),inset 0 3px 4px rgba(255,255,255,.3)}
+.charm .gloss{position:absolute;top:9%;left:17%;width:52%;height:33%;border-radius:50%;
+  background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0));z-index:1;pointer-events:none}
+.charm .motif{position:relative;z-index:2;font-size:30px;line-height:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.16))}
+/* shimmer sweep used during slip-away */
+.charm .shimmer{position:absolute;inset:0;z-index:3;border-radius:50%;opacity:0;
+  background:linear-gradient(115deg,rgba(255,255,255,0) 38%,rgba(255,255,255,.9) 50%,rgba(255,255,255,0) 62%);
+  background-size:260% 100%;background-position:120% 0}
+
+/* settle-in springy, then (some) slip away with a soft shimmer-fade — no blur-bloom, no pop */
+.charm.settle{animation:settle .5s var(--vt-spring) var(--d,0s) both,breathe 2.6s ease-in-out 1.4s infinite}
+.charm.slip{animation:settle .5s var(--vt-spring) var(--d,0s) both, slip 1.6s ease-in-out var(--sd,2s) infinite}
+.charm.slip .shimmer{animation:sweep 1.6s ease-in-out var(--sd,2s) infinite}
+@keyframes settle{0%{opacity:0;transform:scale(.3)}60%{opacity:1;transform:scale(1.12)}100%{opacity:1;transform:scale(1)}}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.018)}}
+/* slip-away: gentle lift + soft fade (opacity), no hard pop, no glow-bloom */
+@keyframes slip{
+  0%,40%{opacity:1;transform:scale(1) translateY(0)}
+  70%{opacity:.5;transform:scale(1.03) translateY(-2px)}
+  100%{opacity:0;transform:scale(1.05) translateY(-4px)}
+}
+@keyframes sweep{
+  0%,40%{opacity:0;background-position:120% 0}
+  55%{opacity:.85}
+  100%{opacity:0;background-position:-60% 0}
+}
+.foot{text-align:center;color:var(--vt-ink-faint);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="hud">
+    <div class="score">0<small>pts</small></div>
+    <div class="lvl-pill">Round 3</div>
+    <div class="lives">
+      <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.3-9C1 8.5 2.6 5 6 5c2 0 3.2 1.2 4 2.3C10.8 6.2 12 5 14 5c3.4 0 5 3.5 3.3 7C19 16.4 12 21 12 21z"/></svg>
+      <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.3-9C1 8.5 2.6 5 6 5c2 0 3.2 1.2 4 2.3C10.8 6.2 12 5 14 5c3.4 0 5 3.5 3.3 7C19 16.4 12 21 12 21z"/></svg>
+      <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.3-9C1 8.5 2.6 5 6 5c2 0 3.2 1.2 4 2.3C10.8 6.2 12 5 14 5c3.4 0 5 3.5 3.3 7C19 16.4 12 21 12 21z"/></svg>
+    </div>
+  </div>
+
+  <div class="banner">Glimpse the charms — <b>they slip away soon!</b></div>
+  <div class="timer"><i></i></div>
+
+  <div class="case" id="case"></div>
+
+  <div class="foot">memorize · charms settle in, then slip away</div>
+</div>
+
+<script>
+const COLORS={
+  strawberry:['#FF6B6B','#E84F58'],tangerine:['#FF9E45','#E8842F'],lemon:['#FFCE3A','#EDB31F'],
+  lime:['#5BC16E','#45A857'],teal:['#1FC7B6','#15A99A'],sky:['#46AEF7','#2E92DD'],
+  grape:['#9B8CFF','#7E6DF0'],bubblegum:['#FF8FCF','#ED74BC']
+};
+// 6 charms across 25 settings; later ones begin to slip away (diagonal wave)
+const charms=[
+  {i:1, col:'strawberry',m:'🍓'},
+  {i:3, col:'sky',       m:'💧'},
+  {i:7, col:'lemon',     m:'🍋'},
+  {i:11,col:'bubblegum', m:'🌸'},
+  {i:16,col:'grape',     m:'⭐'},
+  {i:18,col:'lime',      m:'🐝'},
+];
+const c=document.getElementById('case');
+for(let s=0;s<25;s++){
+  const slot=document.createElement('div');slot.className='setting';
+  const ch=charms.find(x=>x.i===s);
+  if(ch){
+    const order=charms.indexOf(ch);
+    const el=document.createElement('div');el.className='charm';
+    el.style.setProperty('--c',COLORS[ch.col][0]);
+    el.style.setProperty('--d',(order*0.08)+'s');
+    // last two charms are mid-slip-away to show the vanish moment
+    if(order>=4){el.classList.add('slip');el.style.setProperty('--sd',(1.8+(order-4)*0.18)+'s');}
+    else{el.classList.add('settle');}
+    el.innerHTML='<span class="gloss"></span><span class="enamel" style="--c:'+COLORS[ch.col][0]+'"><span class="motif">'+ch.m+'</span></span><span class="shimmer"></span>';
+    slot.appendChild(el);
+  }
+  c.appendChild(slot);
+}
+</script>
+</body>
+</html>

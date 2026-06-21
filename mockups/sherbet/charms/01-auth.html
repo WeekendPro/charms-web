@@ -1,0 +1,141 @@
+<!-- @dsCard group="Brand & Onboarding" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charms · Sign in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --vt-bg:#FFF7F0; --vt-bg-board:#FBEFE6; --vt-surface:#FFFFFF; --vt-surface-2:#FFF1E8;
+  --vt-hairline:#F0E0D4; --vt-ink:#46383B; --vt-ink-soft:#9B8B8E; --vt-ink-faint:#CDBFC1;
+  --vt-strawberry:#FF6B6B; --vt-tangerine:#FF9E45; --vt-lemon:#FFCE3A; --vt-lime:#5BC16E;
+  --vt-teal:#1FC7B6; --vt-sky:#46AEF7; --vt-grape:#9B8CFF; --vt-bubblegum:#FF8FCF;
+  --vt-success:#2FD09B; --vt-life:#FF6B81;
+  --vt-shadow-2:0 6px 14px rgba(217,150,120,.22); --vt-shadow-3:0 14px 30px rgba(214,140,110,.26);
+  --vt-inset-top:inset 0 2px 0 rgba(255,255,255,.6); --vt-spring:cubic-bezier(.18,1.3,.4,1);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#EFE4DA;font-family:'Nunito',sans-serif;color:var(--vt-ink);
+  min-height:100vh;display:grid;place-items:center;padding:20px}
+.phone{width:390px;max-width:100%;border-radius:42px;box-shadow:var(--vt-shadow-3);
+  padding:0;position:relative;overflow:hidden;min-height:760px;
+  background:radial-gradient(120% 70% at 50% 0%,#FFF4E9 0%,#FFEFE0 55%,#FFE8D6 100%)}
+
+/* floating decorative charms */
+.sky{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.float{position:absolute;animation:bob 5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-12px) rotate(var(--r,0deg))}}
+
+/* ---- the universal Charm: round enamel disc ---- */
+.charm{position:relative;aspect-ratio:1;border-radius:50%;
+  background:linear-gradient(160deg,#FFF7EE,#ECD9C8);padding:3px;
+  box-shadow:0 7px 14px rgba(196,130,100,.30),var(--vt-inset-top)}
+.charm .enamel{width:100%;height:100%;border-radius:50%;position:relative;overflow:hidden;
+  display:grid;place-items:center;
+  background:radial-gradient(125% 125% at 32% 24%,rgba(255,255,255,.62),rgba(255,255,255,0) 46%),var(--c,#FF6B6B);
+  box-shadow:inset 0 -6px 10px rgba(0,0,0,.18),inset 0 3px 4px rgba(255,255,255,.3)}
+.charm .gloss{position:absolute;top:9%;left:17%;width:52%;height:33%;border-radius:50%;
+  background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0));z-index:1;pointer-events:none}
+.charm .motif{position:relative;z-index:2;font-size:var(--ms,28px);line-height:1;
+  filter:drop-shadow(0 1px 1px rgba(0,0,0,.16))}
+
+.wrap{position:relative;z-index:3;padding:96px 28px 30px;display:flex;flex-direction:column;
+  align-items:center;min-height:760px}
+
+/* wordmark */
+.brand{display:flex;align-items:center;gap:2px;margin-bottom:8px;animation:drop .6s var(--vt-spring) both}
+.brand .word{font-family:'Fredoka';font-weight:700;font-size:42px;letter-spacing:.04em;
+  background:linear-gradient(180deg,#FF8FCF,#FF6B6B);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand .o{width:42px;height:42px;margin:0 1px}
+@keyframes drop{0%{transform:translateY(-18px) scale(.8);opacity:0}100%{transform:translateY(0) scale(1);opacity:1}}
+.tag{color:var(--vt-ink-soft);font-weight:600;font-size:14.5px;margin:0 0 30px;text-align:center;
+  animation:rise .5s var(--vt-spring) .14s both}
+@keyframes rise{0%{transform:translateY(12px);opacity:0}100%{transform:translateY(0);opacity:1}}
+
+.card{width:100%;background:var(--vt-surface);border-radius:28px;box-shadow:var(--vt-shadow-3);
+  padding:24px 20px;animation:rise .5s var(--vt-spring) .22s both}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--vt-ink-soft);margin:0 4px 6px}
+.field{display:flex;align-items:center;gap:10px;background:var(--vt-surface-2);border:1.5px solid var(--vt-hairline);
+  border-radius:16px;padding:13px 15px;margin-bottom:16px}
+.field:focus-within{border-color:var(--vt-bubblegum);box-shadow:0 0 0 4px rgba(255,143,207,.16)}
+.field svg{width:19px;height:19px;color:var(--vt-ink-faint);flex:none}
+.field input{border:none;background:none;outline:none;font-family:'Nunito';font-weight:600;font-size:16px;
+  color:var(--vt-ink);width:100%}
+.field input::placeholder{color:var(--vt-ink-faint)}
+
+.btn{font-family:'Fredoka';font-weight:600;font-size:17px;border:none;width:100%;padding:15px 0;
+  border-radius:999px;box-shadow:var(--vt-shadow-2),var(--vt-inset-top);cursor:pointer;display:flex;
+  align-items:center;justify-content:center;gap:10px;transition:transform .12s}
+.btn:active{transform:scale(.96)}
+.btn.primary{color:#fff;background:linear-gradient(180deg,#FFA0D6,#FF6B6B);margin-top:4px}
+.divider{display:flex;align-items:center;gap:12px;color:var(--vt-ink-faint);font-size:11px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;margin:18px 2px}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--vt-hairline)}
+.btn.google{color:var(--vt-ink);background:#fff;border:1.5px solid var(--vt-hairline)}
+.btn.google svg{width:19px;height:19px}
+.guest{margin-top:18px;text-align:center;width:100%}
+.guest button{background:none;border:none;font-family:'Nunito';font-weight:700;font-size:14.5px;
+  color:var(--vt-ink-soft);cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--vt-ink-faint)}
+.foot{margin-top:auto;padding-top:26px;font-size:12.5px;color:var(--vt-ink-soft);text-align:center}
+.foot a{color:var(--vt-bubblegum);font-weight:700;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="sky" id="sky"></div>
+  <div class="wrap">
+    <div class="brand">
+      <span class="word">CHAR</span>
+      <span class="charm o" style="--c:var(--vt-lemon);--ms:0"><span class="gloss"></span><span class="enamel" style="--c:var(--vt-lemon)"></span></span>
+      <span class="word">MS</span>
+    </div>
+    <p class="tag">Glimpse the charms. Remember them. Find them.</p>
+
+    <div class="card">
+      <label>Email</label>
+      <div class="field">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 7l9 6 9-6"/></svg>
+        <input type="email" placeholder="you@example.com" value="hello@charms.app">
+      </div>
+      <label>Password</label>
+      <div class="field">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+        <input type="password" placeholder="••••••••" value="sherbet">
+      </div>
+      <button class="btn primary">Sign in</button>
+
+      <div class="divider">or</div>
+
+      <button class="btn google">
+        <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.4 29.3 35 24 35c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 5.1 29.5 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.2-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 5.1 29.5 3 24 3 16 3 9.1 7.6 6.3 14.7z"/><path fill="#4CAF50" d="M24 45c5.2 0 10-2 13.6-5.2l-6.3-5.3C29.2 36 26.7 37 24 37c-5.3 0-9.7-2.6-11.3-7l-6.5 5C9 41.3 16 45 24 45z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4 5.5l6.3 5.3C41.6 36 45 30.6 45 24c0-1.2-.1-2.3-.4-3.5z"/></svg>
+        Continue with Google
+      </button>
+      <div class="guest"><button>Continue as guest</button></div>
+    </div>
+
+    <div class="foot">New here? <a>Create an account</a></div>
+  </div>
+</div>
+
+<script>
+const C=['#FF6B6B','#FF9E45','#FFCE3A','#5BC16E','#1FC7B6','#46AEF7','#9B8CFF','#FF8FCF'];
+const M=['🍓','🐝','🍋','🌸','⭐','💎','🍒','🦋'];
+const spots=[[12,60],[332,52],[16,706],[330,700]];
+const sky=document.getElementById('sky');
+spots.forEach((p,i)=>{
+  const wrap=document.createElement('div');wrap.className='float';
+  wrap.style.left=p[0]+'px';wrap.style.top=p[1]+'px';
+  wrap.style.width=(34+(i%3)*8)+'px';
+  wrap.style.setProperty('--r',((i%2?1:-1)*(6+i*2))+'deg');
+  wrap.style.animationDelay=(-i*0.7)+'s';wrap.style.opacity=.92;
+  wrap.innerHTML='<div class="charm" style="--c:'+C[i]+'"><span class="gloss"></span><span class="enamel" style="--c:'+C[i]+'"><span class="motif" style="--ms:'+(16+(i%3)*4)+'px">'+M[i]+'</span></span></div>';
+  sky.appendChild(wrap);
+});
+</script>
+</body>
+</html>

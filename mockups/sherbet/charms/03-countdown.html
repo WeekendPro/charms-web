@@ -1,0 +1,108 @@
+<!-- @dsCard group="Gameplay" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charms · Countdown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --vt-bg:#FFF7F0; --vt-bg-board:#FBEFE6; --vt-surface:#FFFFFF; --vt-surface-2:#FFF1E8;
+  --vt-hairline:#F0E0D4; --vt-ink:#46383B; --vt-ink-soft:#9B8B8E; --vt-ink-faint:#CDBFC1;
+  --vt-life:#FF6B81; --vt-bubblegum:#FF8FCF; --vt-timer-calm:#46C7B6;
+  --vt-shadow-2:0 6px 14px rgba(217,150,120,.22); --vt-shadow-3:0 14px 30px rgba(214,140,110,.26);
+  --vt-inset-top:inset 0 2px 0 rgba(255,255,255,.6); --vt-spring:cubic-bezier(.18,1.3,.4,1);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#EFE4DA;font-family:'Nunito',sans-serif;color:var(--vt-ink);
+  min-height:100vh;display:grid;place-items:center;padding:20px}
+.phone{width:390px;max-width:100%;background:var(--vt-bg);border-radius:42px;
+  box-shadow:var(--vt-shadow-3);padding:18px 16px 26px;position:relative;overflow:hidden;min-height:760px}
+
+/* HUD (inert) */
+.hud{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 4px 14px;opacity:.6}
+.score{font-family:'Fredoka';font-weight:600;font-size:22px;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:6px}
+.score small{font-family:'Nunito';font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--vt-ink-soft)}
+.lvl-pill{font-family:'Fredoka';font-weight:600;font-size:14px;background:var(--vt-surface);padding:6px 14px;border-radius:999px;box-shadow:var(--vt-shadow-2),var(--vt-inset-top)}
+.lives{display:flex;gap:5px}
+.heart{width:20px;height:20px;color:var(--vt-life);filter:drop-shadow(0 2px 2px rgba(255,107,129,.4))}
+.timer{height:10px;border-radius:999px;background:var(--vt-surface-2);overflow:hidden;margin:0 6px 16px;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.06);opacity:.6}
+.timer i{display:block;height:100%;width:100%;border-radius:999px;background:var(--vt-timer-calm)}
+.banner{text-align:center;font-family:'Fredoka';font-weight:600;font-size:15px;margin:2px 0 12px;color:var(--vt-ink-soft)}
+
+/* the Case — drawn, empty */
+.case{background:var(--vt-bg-board);border-radius:30px;padding:16px;position:relative;
+  box-shadow:inset 0 2px 10px rgba(180,120,90,.16);
+  display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.setting{aspect-ratio:1;border-radius:50%;background:var(--vt-surface-2);border:1px solid var(--vt-hairline);
+  box-shadow:inset 0 2px 4px rgba(180,120,90,.14),inset 0 -1px 0 rgba(255,255,255,.5)}
+
+/* countdown numerals, centered inside the Case border */
+.count{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.count .ring{position:absolute;width:150px;height:150px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(255,247,240,.94),rgba(255,247,240,.7) 70%,rgba(255,247,240,0));}
+.num{position:absolute;font-family:'Fredoka';font-weight:700;font-size:130px;line-height:1;
+  background:linear-gradient(180deg,#FFB0DC,#FF6B6B);-webkit-background-clip:text;background-clip:text;color:transparent;
+  opacity:0;filter:drop-shadow(0 6px 14px rgba(255,107,129,.32))}
+.num.go{font-size:64px;background:linear-gradient(180deg,#5BD9C9,#2FD09B);-webkit-background-clip:text;background-clip:text}
+.num:nth-child(2){animation:beat 3.2s ease-out 0s infinite}
+.num:nth-child(3){animation:beat 3.2s ease-out .8s infinite}
+.num:nth-child(4){animation:beat 3.2s ease-out 1.6s infinite}
+.num:nth-child(5){animation:beatGo 3.2s ease-out 2.4s infinite}
+@keyframes beat{
+  0%{opacity:0;transform:scale(.4)}
+  9%{opacity:1;transform:scale(1.12)}
+  16%{transform:scale(1)}
+  22%{opacity:1}
+  25%{opacity:0;transform:scale(.86)}
+  100%{opacity:0}
+}
+@keyframes beatGo{
+  0%{opacity:0;transform:scale(.5)}
+  9%{opacity:1;transform:scale(1.18)}
+  16%{transform:scale(1)}
+  24%{opacity:1;transform:scale(1.04)}
+  30%{opacity:0;transform:scale(1.1)}
+  100%{opacity:0}
+}
+.foot{text-align:center;color:var(--vt-ink-faint);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:20px}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="hud">
+    <div class="score">0<small>pts</small></div>
+    <div class="lvl-pill">Round 3</div>
+    <div class="lives">
+      <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.3-9C1 8.5 2.6 5 6 5c2 0 3.2 1.2 4 2.3C10.8 6.2 12 5 14 5c3.4 0 5 3.5 3.3 7C19 16.4 12 21 12 21z"/></svg>
+      <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.3-9C1 8.5 2.6 5 6 5c2 0 3.2 1.2 4 2.3C10.8 6.2 12 5 14 5c3.4 0 5 3.5 3.3 7C19 16.4 12 21 12 21z"/></svg>
+      <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.3-9C1 8.5 2.6 5 6 5c2 0 3.2 1.2 4 2.3C10.8 6.2 12 5 14 5c3.4 0 5 3.5 3.3 7C19 16.4 12 21 12 21z"/></svg>
+    </div>
+  </div>
+
+  <div class="banner">Get ready to glimpse…</div>
+  <div class="timer"><i></i></div>
+
+  <div class="case" id="case">
+    <div class="count">
+      <div class="ring"></div>
+      <div class="num">3</div>
+      <div class="num">2</div>
+      <div class="num">1</div>
+      <div class="num go">Go!</div>
+    </div>
+  </div>
+
+  <div class="foot">The case is set · charms appear next</div>
+</div>
+
+<script>
+const c=document.getElementById('case');
+for(let i=0;i<25;i++){const s=document.createElement('div');s.className='setting';c.insertBefore(s,c.firstChild);}
+</script>
+</body>
+</html>

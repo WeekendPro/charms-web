@@ -1,0 +1,135 @@
+<!-- @dsCard group="Results" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charms · Lovely run</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --vt-bg:#FFF7F0; --vt-surface:#FFFFFF; --vt-surface-2:#FFF1E8; --vt-hairline:#F0E0D4;
+  --vt-ink:#46383B; --vt-ink-soft:#9B8B8E; --vt-ink-faint:#CDBFC1;
+  --vt-success:#2FD09B; --vt-star:#FFCE3A; --vt-combo-a:#FF6B6B; --vt-combo-b:#FFA94D; --vt-life:#FF6B81;
+  --vt-shadow-2:0 6px 14px rgba(217,150,120,.22); --vt-shadow-3:0 14px 30px rgba(214,140,110,.26);
+  --vt-inset-top:inset 0 2px 0 rgba(255,255,255,.6); --vt-spring:cubic-bezier(.18,1.3,.4,1);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#EFE4DA;font-family:'Nunito',sans-serif;color:var(--vt-ink);
+  min-height:100vh;display:grid;place-items:center;padding:20px}
+.phone{width:390px;max-width:100%;border-radius:42px;box-shadow:var(--vt-shadow-3);
+  padding:0;position:relative;overflow:hidden;min-height:760px;
+  background:radial-gradient(120% 80% at 50% 0%,#FFF4E9 0%,#FFEFE0 55%,#FFE8D6 100%)}
+.confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.conf{position:absolute;width:10px;height:14px;border-radius:3px;top:-20px;animation:fall linear infinite}
+@keyframes fall{0%{transform:translateY(-20px) rotate(0)}100%{transform:translateY(800px) rotate(540deg)}}
+
+.wrap{position:relative;z-index:2;padding:46px 26px 28px;text-align:center;display:flex;flex-direction:column;align-items:center;min-height:760px}
+
+/* charm treatment */
+.charm{position:relative;aspect-ratio:1;border-radius:50%;background:linear-gradient(160deg,#FFF7EE,#ECD9C8);padding:3px;
+  box-shadow:0 7px 14px rgba(196,130,100,.30),var(--vt-inset-top)}
+.charm .enamel{width:100%;height:100%;border-radius:50%;position:relative;overflow:hidden;display:grid;place-items:center;
+  background:radial-gradient(125% 125% at 32% 24%,rgba(255,255,255,.62),rgba(255,255,255,0) 46%),var(--c,#FF6B6B);
+  box-shadow:inset 0 -6px 10px rgba(0,0,0,.18),inset 0 3px 4px rgba(255,255,255,.3)}
+.charm .gloss{position:absolute;top:9%;left:17%;width:52%;height:33%;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0));z-index:1}
+.charm .motif{position:relative;z-index:2;font-size:var(--ms,26px);line-height:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.16))}
+
+/* hero charm badge */
+.badge{width:112px;margin-bottom:18px;animation:badgePop .6s var(--vt-spring) both}
+.badge .motif{--ms:54px}
+@keyframes badgePop{0%{transform:scale(0) rotate(-12deg)}60%{transform:scale(1.14) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+.title{font-family:'Fredoka';font-weight:700;font-size:34px;margin:0 0 4px;
+  background:linear-gradient(90deg,var(--vt-combo-a),var(--vt-combo-b));-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:rise .5s var(--vt-spring) .12s both}
+.sub{color:var(--vt-ink-soft);font-weight:600;font-size:15px;margin:0 0 18px;animation:rise .5s var(--vt-spring) .2s both}
+@keyframes rise{0%{transform:translateY(14px);opacity:0}100%{transform:translateY(0);opacity:1}}
+
+/* score + stars card */
+.card{width:100%;background:#fff;border-radius:28px;box-shadow:var(--vt-shadow-3);padding:22px 22px 18px;
+  animation:rise .5s var(--vt-spring) .3s both}
+.scoreline{display:flex;align-items:baseline;justify-content:center;gap:8px}
+.scoreline .n{font-family:'Fredoka';font-weight:700;font-size:46px;font-variant-numeric:tabular-nums}
+.scaption{font-weight:800;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--vt-ink-soft);margin-top:2px}
+.stars{display:flex;justify-content:center;gap:8px;margin:16px 0 2px}
+.star{width:32px;height:32px;color:var(--vt-star)}
+.star.off{color:#F0E2D2}
+.star:nth-child(1){animation:starPop .45s var(--vt-spring) .5s both}
+.star:nth-child(2){animation:starPop .45s var(--vt-spring) .62s both}
+.star:nth-child(3){animation:starPop .45s var(--vt-spring) .74s both}
+@keyframes starPop{0%{transform:scale(0) rotate(-30deg)}100%{transform:scale(1) rotate(0)}}
+
+/* charms earned → bracelet */
+.earned{width:100%;margin-top:18px;background:#fff;border-radius:24px;box-shadow:var(--vt-shadow-2);padding:16px;
+  animation:rise .5s var(--vt-spring) .4s both}
+.earned h4{margin:0 0 12px;font-family:'Nunito';font-weight:800;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--vt-ink-soft)}
+.row{display:flex;justify-content:center;gap:12px}
+.row .charm{width:54px}
+.row .charm{animation:earnPop .5s var(--vt-spring) both}
+.row .charm:nth-child(1){animation-delay:.55s}
+.row .charm:nth-child(2){animation-delay:.66s}
+.row .charm:nth-child(3){animation-delay:.77s}
+@keyframes earnPop{0%{transform:scale(0) translateY(8px)}60%{transform:scale(1.16)}100%{transform:scale(1) translateY(0)}}
+.added{margin-top:10px;font-size:12px;font-weight:700;color:var(--vt-success)}
+
+.btns{width:100%;display:flex;flex-direction:column;gap:12px;margin-top:auto;padding-top:22px;animation:rise .5s var(--vt-spring) .5s both}
+.btn{font-family:'Fredoka';font-weight:600;font-size:18px;border:none;padding:16px 0;border-radius:999px;
+  box-shadow:var(--vt-shadow-2),var(--vt-inset-top);cursor:pointer;transition:transform .12s}
+.btn.primary{color:#fff;background:linear-gradient(180deg,#43E0AB,#2FD09B)}
+.btn.secondary{color:var(--vt-ink);background:#fff;border:1.5px solid var(--vt-hairline)}
+.btn:active{transform:scale(.96)}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="confetti" id="confetti"></div>
+  <div class="wrap">
+    <div class="charm badge" style="--c:var(--vt-bubblegum)"><span class="gloss"></span><span class="enamel" style="--c:var(--vt-bubblegum)"><span class="motif">🍓</span></span></div>
+    <h1 class="title">Lovely run!</h1>
+    <p class="sub">You found 14 charms — sweet memory.</p>
+
+    <div class="card">
+      <div class="scoreline"><span class="n">2,140</span></div>
+      <div class="scaption">final score</div>
+      <div class="stars">
+        <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.8 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg>
+        <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.8 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg>
+        <svg class="star off" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.8 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg>
+      </div>
+    </div>
+
+    <div class="earned">
+      <h4>Charms earned this run</h4>
+      <div class="row" id="earned"></div>
+      <div class="added">+3 added to your Bracelet ✦</div>
+    </div>
+
+    <div class="btns">
+      <button class="btn primary">Play again</button>
+      <button class="btn secondary">Home</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const C=['#FF6B6B','#FF9E45','#FFCE3A','#5BC16E','#1FC7B6','#46AEF7','#9B8CFF','#FF8FCF'];
+const earned=[['#5BC16E','🍏'],['#46AEF7','💎'],['#FF8FCF','🦋']];
+const row=document.getElementById('earned');
+earned.forEach(e=>{
+  const d=document.createElement('div');d.className='charm';d.style.setProperty('--c',e[0]);
+  d.innerHTML='<span class="gloss"></span><span class="enamel" style="--c:'+e[0]+'"><span class="motif" style="--ms:26px">'+e[1]+'</span></span>';
+  row.appendChild(d);
+});
+const cf=document.getElementById('confetti');
+for(let i=0;i<26;i++){
+  const d=document.createElement('div');d.className='conf';
+  d.style.left=(Math.random()*100)+'%';d.style.background=C[i%C.length];
+  d.style.animationDuration=(2.6+Math.random()*1.8)+'s';d.style.animationDelay=(-Math.random()*3)+'s';
+  d.style.opacity=.85;if(i%3===0)d.style.borderRadius='999px';
+  cf.appendChild(d);
+}
+</script>
+</body>
+</html>
