@@ -4,7 +4,7 @@ import { getSession } from './lib/auth'
 import { useNavStore } from './store/navStore'
 import { AuthScreen } from './components/AuthScreen'
 import { HomeScreen } from './components/HomeScreen'
-import { StaggerScreen } from './components/StaggerScreen'
+import CharmsGame from './components/charmsGame/CharmsGame'
 import { GlobalLoadingOverlay } from './components/GlobalLoadingOverlay'
 import { GlobalMenu } from './components/GlobalMenu'
 import { CharmsDemo } from './components/charms/CharmsDemo'
@@ -39,14 +39,14 @@ export default function App() {
     switch (appView) {
       case 'auth': return <AuthScreen />
       case 'home': return <HomeScreen />
-      case 'stagger': return <StaggerScreen />
+      case 'game': return <CharmsGame />
       default: return <AuthScreen />
     }
   })()
 
-  // The Infinite Stagger layout owns its own Pause/Exit controls, so the global
-  // menu is suppressed there (and on the auth screen).
-  const showMenu = appView !== 'auth' && appView !== 'stagger'
+  // The Charms game owns its own full-screen layout, so the global menu is
+  // suppressed there (and on the auth screen).
+  const showMenu = appView !== 'auth' && appView !== 'game'
 
   return (
     <>
