@@ -2,53 +2,47 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-vi.mock('../../src/lib/auth', () => ({
-  signOut: vi.fn().mockResolvedValue({ error: null }),
-}))
+vi.mock('../../src/lib/auth', () => ({ signOut: vi.fn().mockResolvedValue({ error: null }) }))
 import { HomeScreen } from '../../src/components/HomeScreen'
 import { useNavStore } from '../../src/store/navStore'
 import { useSettingsStore } from '../../src/store/settingsStore'
-import { useStaggerStore } from '../../src/store/staggerStore'
+import { useCharmsGameStore } from '../../src/store/charmsGameStore'
 
 beforeEach(() => {
   useNavStore.getState().reset()
   useSettingsStore.setState({ settings: { difficulty: 'easy' } })
-  useStaggerStore.getState().exit()
+  useCharmsGameStore.getState().exit()
   vi.clearAllMocks()
 })
 
 describe('HomeScreen', () => {
-  it('Play drops into Infinite Stagger', async () => {
+  it('Play starts a Charms run and enters the game view', async () => {
     const user = userEvent.setup()
     render(<HomeScreen />)
     await user.click(screen.getByRole('button', { name: /Play/i }))
-    expect(useNavStore.getState().appView).toBe('stagger')
-    expect(useStaggerStore.getState().phase).toBe('countdown')
-  })
-
-  it('hides the Experimental Modes entry (and its modes) for now', () => {
-    render(<HomeScreen />)
-    expect(screen.queryByRole('button', { name: 'Experimental Modes' })).toBeNull()
-    expect(screen.queryByRole('button', { name: /Training/i })).toBeNull()
-    expect(screen.queryByRole('button', { name: /Subway Map/i })).toBeNull()
+    expect(useNavStore.getState().appView).toBe('game')
+    expect(useCharmsGameStore.getState().phase).toBe('countdown')
   })
 
   it('defaults the difficulty selector to Easy', () => {
     render(<HomeScreen />)
-    expect(screen.getByRole('button', { name: 'Easy', pressed: true })).toBeTruthy()
+    expect(screen.getByRole('button', { name: /Easy/i, pressed: true })).toBeTruthy()
   })
 
   it('selecting Medium / Hard updates the difficulty setting', async () => {
     const user = userEvent.setup()
     render(<HomeScreen />)
-    await user.click(screen.getByRole('button', { name: 'Medium' }))
+    await user.click(screen.getByRole('button', { name: /Medium/i }))
     expect(useSettingsStore.getState().settings.difficulty).toBe('medium')
-    await user.click(screen.getByRole('button', { name: 'Hard' }))
+    await user.click(screen.getByRole('button', { name: /Hard/i }))
     expect(useSettingsStore.getState().settings.difficulty).toBe('hard')
   })
 
-  it('does not offer Logout — that lives in the global menu', () => {
+  it('starts the run at the selected difficulty', async () => {
+    const user = userEvent.setup()
     render(<HomeScreen />)
-    expect(screen.queryByRole('button', { name: /Logout/i })).toBeNull()
+    await user.click(screen.getByRole('button', { name: /Hard/i }))
+    await user.click(screen.getByRole('button', { name: /Play/i }))
+    expect(useCharmsGameStore.getState().difficulty).toBe('hard')
   })
 })
