@@ -13,16 +13,16 @@ export const SETTINGS_STORAGE_KEY = 'gapcity:settings:v1'
  */
 
 /**
- * Stagger reveal difficulty (set from the home screen). Differences live entirely
- * in the reveal phase:
- *  - `easy`   — gaps bloom in their own PIECE colour (track shape + colour).
- *  - `medium` — gaps bloom in the uniform branded pink (shape only).
- *  - `hard`   — pink reveal, but the sequence plays noticeably faster.
+ * Charms difficulty (set from the Home screen). Scales the starting round:
+ *  - `easy`   — fewer charms, a gentle clock, fewer decoys.
+ *  - `medium` — a few more charms, a touch quicker.
+ *  - `hard`   — more charms from the start, tighter glimpse + find clocks.
+ * See `src/lib/charmsRound.ts` `roundConfig()` for the exact curve.
  */
 export type Difficulty = 'easy' | 'medium' | 'hard'
 
 export interface UserSettings {
-  /** Selected Stagger reveal difficulty. Defaults to the gentlest (easy). */
+  /** Selected Charms difficulty. Defaults to the gentlest (easy). */
   difficulty: Difficulty
 }
 
