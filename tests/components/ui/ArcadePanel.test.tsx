@@ -8,13 +8,13 @@ describe('ArcadePanel', () => {
     expect(screen.getByText('Inside')).toBeInTheDocument()
   })
 
-  it('applies recessed neon-edge panel classes', () => {
+  it('applies the Sherbet white-card panel classes', () => {
     render(<ArcadePanel data-testid="panel">x</ArcadePanel>)
     const el = screen.getByTestId('panel')
-    expect(el.className).toContain('bg-arcade-panel')
-    expect(el.className).toContain('border-arcade-edge')
-    expect(el.className).toContain('shadow-panel-inset')
-    expect(el.className).toContain('rounded-md')
+    expect(el.className).toContain('bg-vt-panel')
+    expect(el.className).toContain('border-vt-edge')
+    expect(el.className).toContain('shadow-vt-tile')
+    expect(el.className).toContain('rounded-2xl')
   })
 
   it('merges a caller-supplied className', () => {

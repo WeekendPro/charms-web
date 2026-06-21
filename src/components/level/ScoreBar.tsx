@@ -29,7 +29,7 @@ export function ScoreBar({ total, max = LEVEL_MAX, unlockRatio = LEVEL_UNLOCK_RA
       <div className="relative pt-5">
         {/* Unlock flag, above the bar */}
         <div
-          className="absolute top-0 text-[8px] font-pixel whitespace-nowrap text-neon-yellow text-glow-yellow"
+          className="absolute top-0 text-[8px] font-pixel whitespace-nowrap text-vt-amber"
           style={{ left: `${unlockPct}%`, transform: 'translateX(-50%)' }}
         >
           🔓 UNLOCK
@@ -46,7 +46,7 @@ export function ScoreBar({ total, max = LEVEL_MAX, unlockRatio = LEVEL_UNLOCK_RA
           {/* Your fill */}
           <div
             className="h-full rounded-full relative transition-[width] duration-500"
-            style={{ width: `${pct}%`, background: 'linear-gradient(90deg,#0891b2,#22d3ee 70%,#67e8f9)', boxShadow: '0 0 10px #22d3ee99' }}
+            style={{ width: `${pct}%`, background: 'linear-gradient(90deg,#2E92DD,#46AEF7 70%,#7AC6FA)', boxShadow: '0 2px 8px rgba(70,174,247,0.45)' }}
           />
           {/* Unlock tick */}
           <div

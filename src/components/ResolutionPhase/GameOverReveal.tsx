@@ -25,10 +25,10 @@ export function GameOverReveal() {
 
   return (
     <div data-testid="game-over-reveal" className="flex flex-col items-center gap-5 w-full max-w-sm">
-      <div className="font-pixel font-bold text-[18px] text-neon-red text-glow-red tracking-wide">GAME OVER</div>
+      <div className="font-pixel font-bold text-[18px] text-neon-red tracking-wide">GAME OVER</div>
 
       <div className="flex flex-col items-center gap-2">
-        <div className="text-[9px] font-pixel tracking-[0.2em] text-zinc-400">YOUR SELECTION</div>
+        <div className="text-[9px] font-pixel tracking-[0.2em] text-vt-dim">YOUR SELECTION</div>
         <SelectionCart slots={yourSlots} consumed={NONE} />
       </div>
 

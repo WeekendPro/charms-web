@@ -32,7 +32,7 @@ export function ScorePanel({ roundScore, grandTotal, show, isFailure = false, sp
       transition={{ duration: 0.15 }}
     >
       {!isFailure && (
-        <Row icon={speedSlow ? '🐢' : '⚡'} label="Speed" value={roundScore.speedBonus} delay={0} color={speedSlow ? 'text-gray-400' : 'text-neon-yellow'} />
+        <Row icon={speedSlow ? '🐢' : '⚡'} label="Speed" value={roundScore.speedBonus} delay={0} color={speedSlow ? 'text-vt-dim' : 'text-neon-yellow'} />
       )}
 
       <div className="mt-2 pt-2 border-t border-arcade-edge flex flex-col gap-1">
@@ -42,8 +42,8 @@ export function ScorePanel({ roundScore, grandTotal, show, isFailure = false, sp
           animate={{ opacity: 1, scale: [0.92, 1.08, 1] }}
           transition={{ delay: ROUND_TOTAL_DELAY, duration: 0.35, ease: [0.34, 1.56, 0.64, 1] }}
         >
-          <span className="font-pixel text-[9px] tracking-[0.1em] text-gray-400 uppercase">Round Total</span>
-          <span className={`font-pixel font-bold text-lg tabular-nums ${roundScore.total < 0 ? 'text-neon-red text-glow-red' : 'text-neon-yellow text-glow-yellow'}`}>
+          <span className="font-pixel text-[9px] tracking-[0.1em] text-vt-dim uppercase">Round Total</span>
+          <span className={`font-pixel font-bold text-lg tabular-nums ${roundScore.total < 0 ? 'text-neon-red' : 'text-neon-yellow'}`}>
             {roundScore.total >= 0 ? '+' : ''}<DelayedCountUp value={roundScore.total} delay={ROUND_TOTAL_DELAY} />
           </span>
         </motion.div>
@@ -54,8 +54,8 @@ export function ScorePanel({ roundScore, grandTotal, show, isFailure = false, sp
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: GRAND_TOTAL_DELAY, duration: 0.3, ease: 'easeOut' }}
         >
-          <span className="font-pixel text-[9px] tracking-[0.1em] text-gray-500 uppercase">Grand Total</span>
-          <span className="font-pixel font-bold text-sm text-neon-yellow text-glow-yellow tabular-nums">
+          <span className="font-pixel text-[9px] tracking-[0.1em] text-vt-dim uppercase">Grand Total</span>
+          <span className="font-pixel font-bold text-sm text-neon-yellow tabular-nums">
             <DelayedCountUp value={grandTotal} delay={GRAND_TOTAL_DELAY} />
           </span>
         </motion.div>
@@ -76,9 +76,9 @@ function Row({ icon, label, value, delay, color }: {
     >
       <span>
         <span className={`inline-block w-5 text-center mr-1 ${color}`}>{icon}</span>
-        <span className="text-gray-300">{label}</span>
+        <span className="text-vt-text">{label}</span>
       </span>
-      <span className={`font-semibold tabular-nums ${value < 0 ? 'text-neon-red' : 'text-white'}`}>
+      <span className={`font-semibold tabular-nums ${value < 0 ? 'text-neon-red' : 'text-vt-text'}`}>
         {value >= 0 ? '+' : ''}<DelayedCountUp value={value} delay={delay} />
       </span>
     </motion.div>

@@ -22,21 +22,21 @@ const TIER: Record<Tier, {
 }> = {
   close: {
     label: 'So close!', glyph: '≈',
-    gradient: 'linear-gradient(135deg, #f59e0b, #d97706)',
-    shadow: '0 8px 24px rgba(245,158,11,.35), 0 0 0 4px rgba(245,158,11,.15)',
-    text: 'text-neon-yellow text-glow-yellow',
+    gradient: 'linear-gradient(135deg, #FFB13C, #FF9E45)',
+    shadow: '0 8px 24px rgba(255,177,60,.30), 0 0 0 4px rgba(255,177,60,.14)',
+    text: 'text-neon-yellow',
   },
   tough: {
     label: 'Tough Round', glyph: '✕',
-    gradient: 'linear-gradient(135deg, #ef4444, #b91c1c)',
-    shadow: '0 8px 24px rgba(239,68,68,.35), 0 0 0 4px rgba(239,68,68,.15)',
-    text: 'text-neon-red text-glow-red',
+    gradient: 'linear-gradient(135deg, #FF8FA0, #FF6B81)',
+    shadow: '0 8px 24px rgba(255,107,129,.30), 0 0 0 4px rgba(255,107,129,.14)',
+    text: 'text-neon-red',
   },
   yikes: {
     label: 'Yikes', glyph: '✕',
-    gradient: 'linear-gradient(135deg, #ef4444, #b91c1c)',
-    shadow: '0 8px 24px rgba(239,68,68,.35), 0 0 0 4px rgba(239,68,68,.15)',
-    text: 'text-neon-red text-glow-red',
+    gradient: 'linear-gradient(135deg, #FF8FA0, #FF6B81)',
+    shadow: '0 8px 24px rgba(255,107,129,.30), 0 0 0 4px rgba(255,107,129,.14)',
+    text: 'text-neon-red',
   },
 }
 
@@ -71,7 +71,7 @@ export function PartialBadge({ show, coverage, reason }: Props) {
       </motion.span>
       {subLabel && (
         <motion.span
-          className="mt-1 text-xs text-gray-400"
+          className="mt-1 text-xs text-vt-dim"
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.2 }}

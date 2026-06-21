@@ -22,11 +22,11 @@ function initials(name: string): string {
 
 function Avatar({ user }: { user: MenuUser }) {
   if (user.avatarUrl) {
-    return <img src={user.avatarUrl} alt={user.name} className="w-12 h-12 rounded-full object-cover ring-1 ring-white/15" />
+    return <img src={user.avatarUrl} alt={user.name} className="w-12 h-12 rounded-full object-cover ring-1 ring-vt-edge" />
   }
   return (
     <div className="w-12 h-12 rounded-full grid place-items-center font-black text-lg text-white
-      bg-gradient-to-br from-neon-cyan to-neon-magenta ring-1 ring-white/15">
+      bg-gradient-to-br from-neon-cyan to-neon-magenta ring-1 ring-vt-edge">
       {initials(user.name)}
     </div>
   )
@@ -34,9 +34,9 @@ function Avatar({ user }: { user: MenuUser }) {
 
 function Action({ label, onClick, tone = 'default' }:
   { label: string; onClick: () => void; tone?: 'default' | 'muted' | 'danger' }) {
-  const color = tone === 'danger' ? 'text-neon-red hover:text-glow-red'
-    : tone === 'muted' ? 'text-arcade-edge hover:text-gray-300'
-    : 'text-gray-200 hover:text-neon-cyan'
+  const color = tone === 'danger' ? 'text-vt-red hover:opacity-80'
+    : tone === 'muted' ? 'text-vt-dim hover:text-vt-text'
+    : 'text-vt-text hover:text-vt-cyan'
   return (
     <button onClick={onClick} className={`flex items-center gap-2.5 text-left font-pixel uppercase tracking-[0.08em] text-base py-3 ${color}`}>
       {label}
@@ -108,7 +108,7 @@ export function GlobalMenu() {
         aria-label="Menu"
         aria-expanded={open}
         className="fixed top-3 right-3 z-50 grid place-items-center w-10 h-10 rounded-xl
-          border border-arcade-edge bg-arcade-panel/60 text-gray-200 hover:border-neon-cyan hover:text-neon-cyan
+          border border-vt-edge bg-vt-panel/80 text-vt-text shadow-vt-tile hover:border-vt-cyan hover:text-vt-cyan
           transition-colors"
       >
         {open ? (
@@ -123,18 +123,18 @@ export function GlobalMenu() {
       </button>
 
       {open && (
-        <div className="fixed inset-0 z-40 flex flex-col px-7 pt-20 pb-8 text-white
-          bg-gradient-to-b from-arcade-bg via-arcade-panel to-black">
+        <div className="fixed inset-0 z-40 flex flex-col px-7 pt-20 pb-8 text-vt-text
+          bg-gradient-to-b from-vt-void via-vt-grid to-vt-panel">
           <ScanlineOverlay />
           {inGame && (
-            <div className="font-pixel text-[9px] uppercase tracking-[0.2em] text-neon-cyan text-glow-cyan mb-1">Paused</div>
+            <div className="font-pixel text-[9px] uppercase tracking-[0.2em] text-vt-cyan mb-1">Paused</div>
           )}
           {user && (
             <div className="flex items-center gap-3 mb-8">
               <Avatar user={user} />
               <div className="min-w-0">
-                <div className="font-pixel text-sm leading-tight truncate">{user.name}</div>
-                <div className="text-xs text-gray-400 truncate">
+                <div className="font-pixel text-sm leading-tight truncate text-vt-text">{user.name}</div>
+                <div className="text-xs text-vt-dim truncate">
                   {user.email ?? (user.isGuest ? 'Guest session' : '')}
                 </div>
               </div>

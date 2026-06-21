@@ -13,7 +13,7 @@ const CONFETTI_OFFSETS = [
   { x: -40, y:  48 },
   { x:  40, y:  48 },
 ]
-const CONFETTI_COLORS = ['#facc15', '#22c55e', '#ec4899', '#22d3ee', '#facc15', '#f97316']
+const CONFETTI_COLORS = ['#FFCE3A', '#2FD09B', '#FF8FCF', '#46AEF7', '#FFCE3A', '#FF9E45']
 
 export function CelebrationBadge({ show }: Props) {
   if (!show) return null
@@ -26,8 +26,8 @@ export function CelebrationBadge({ show }: Props) {
           width: 84,
           height: 84,
           borderRadius: 22,
-          background: 'linear-gradient(135deg, #22c55e, #16a34a)',
-          boxShadow: '0 8px 24px rgba(34,197,94,.35), 0 0 0 4px rgba(34,197,94,.15)',
+          background: 'linear-gradient(135deg, #2FD09B, #1FC7B6)',
+          boxShadow: '0 8px 24px rgba(47,208,155,.30), 0 0 0 4px rgba(47,208,155,.14)',
         }}
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: [0, 1.15, 1] }}
@@ -68,7 +68,7 @@ export function CelebrationBadge({ show }: Props) {
       </motion.div>
 
       <motion.span
-        className="mt-3 font-pixel text-xs uppercase tracking-[0.1em] text-neon-green text-glow-cyan"
+        className="mt-3 font-pixel text-xs uppercase tracking-[0.1em] text-neon-green"
         initial={{ opacity: 0, y: 4 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.2 }}

@@ -10,10 +10,10 @@ export interface MetricDef {
 
 // Order = tab order. Colors per Global Constraints.
 export const METRICS: MetricDef[] = [
-  { key: 'score',    label: 'Score',    hex: '#FFC23D' },
-  { key: 'recalled', label: 'Recalled', hex: '#FF2D9B' },
-  { key: 'combo',    label: 'Combo',    hex: '#B6FF3C', prefix: '×' },
-  { key: 'accuracy', label: 'Accuracy', hex: '#28F0FF', suffix: '%' },
+  { key: 'score',    label: 'Score',    hex: '#FFB13C' },
+  { key: 'recalled', label: 'Recalled', hex: '#FF8FCF' },
+  { key: 'combo',    label: 'Combo',    hex: '#5BC16E', prefix: '×' },
+  { key: 'accuracy', label: 'Accuracy', hex: '#46AEF7', suffix: '%' },
 ]
 
 export function ordinal(n: number): string {

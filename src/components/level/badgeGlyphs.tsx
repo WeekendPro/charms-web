@@ -21,9 +21,9 @@ export function ClassicTetrominoGlyph() {
     width: 15,
     height: 15,
     borderRadius: 3,
-    background: 'linear-gradient(180deg,#67e8f9,#22d3ee)',
+    background: 'linear-gradient(180deg,#7AC6FA,#46AEF7)',
     boxShadow:
-      '0 0 8px rgba(34,211,238,0.6), inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -2px 0 rgba(0,0,0,0.22)',
+      '0 2px 5px rgba(70,174,247,0.35), inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -2px 0 rgba(46,146,221,0.30)',
   }
   const empty: CSSProperties = { width: 15, height: 15 }
   return (
@@ -41,14 +41,14 @@ export function ColorQuadGlyph() {
     height: 21,
     borderRadius: 4,
     background: `linear-gradient(180deg,${light},${color})`,
-    boxShadow: `0 0 7px ${color}99, inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -2px 0 rgba(0,0,0,0.22)`,
+    boxShadow: `0 2px 5px ${color}55, inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -2px 0 rgba(0,0,0,0.12)`,
   })
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 21px)', gap: '4px' }}>
-      <span style={block('#22d3ee', '#67e8f9')} />
-      <span style={block('#ff2d95', '#fb7bb6')} />
-      <span style={block('#f59e0b', '#fbbf24')} />
-      <span style={block('#39d98a', '#6ee7b7')} />
+      <span style={block('#46AEF7', '#7AC6FA')} />
+      <span style={block('#FF8FCF', '#FFB3DF')} />
+      <span style={block('#FFB13C', '#FFCE3A')} />
+      <span style={block('#2FD09B', '#5BE0B7')} />
     </div>
   )
 }
@@ -84,19 +84,20 @@ export function EyesGlyph() {
 
 export function RiddleGlyph() {
   return (
-    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#1FC7B6" strokeWidth="2">
       <circle cx="11" cy="11" r="6" />
       <path d="M20 20l-4-4" strokeLinecap="round" />
     </svg>
   )
 }
 
-/** CSS background string for each badge center disc. */
+/** CSS background string for each badge center disc — soft warm-white stages so
+ *  the glyph sits on a calm Sherbet stage, faintly tinted with the crest's hue. */
 export const BADGE_CENTER_BG: Record<string, string> = {
-  play: 'linear-gradient(135deg,#34d399,#16a34a)',
-  classic: 'linear-gradient(135deg,#0a1622,#05080f)',
-  quad: '#0a1226',
-  seq: 'linear-gradient(135deg,#334155,#0f172a)',
-  eyes: 'radial-gradient(circle at 50% 38%,#16233f,#070b18)',
-  riddle: 'linear-gradient(135deg,#2dd4bf,#0f766e)',
+  play: 'linear-gradient(135deg,#E8FAF1,#FFFFFF)',
+  classic: 'linear-gradient(135deg,#EAF5FF,#FFFFFF)',
+  quad: 'linear-gradient(135deg,#FFF0F8,#FFFFFF)',
+  seq: 'linear-gradient(135deg,#FFF4E6,#FFFFFF)',
+  eyes: 'radial-gradient(circle at 50% 38%,#EAFBF4,#FFFFFF)',
+  riddle: 'linear-gradient(135deg,#E6FBF7,#FFFFFF)',
 }

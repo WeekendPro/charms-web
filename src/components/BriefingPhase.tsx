@@ -24,10 +24,10 @@ export function BriefingPhase() {
 
   return (
     <div className="flex flex-col items-center text-center gap-5 w-full max-w-[360px]">
-      <h2 className="font-pixel font-bold text-[15px] text-neon-cyan text-glow-cyan tracking-wide">{title}</h2>
-      <p className="text-zinc-300 text-[15px] leading-relaxed max-w-[300px]">{objective}</p>
+      <h2 className="font-pixel font-bold text-[15px] text-neon-cyan tracking-wide">{title}</h2>
+      <p className="text-vt-text text-[15px] leading-relaxed max-w-[300px]">{objective}</p>
 
-      <div className="text-[9px] font-pixel tracking-[0.2em] text-zinc-500">HOW IT WORKS</div>
+      <div className="text-[9px] font-pixel tracking-[0.2em] text-vt-dim">HOW IT WORKS</div>
       <div className="rounded-xl border border-arcade-edge bg-arcade-panel shadow-panel-inset p-5">
         <HowToAnimation component={activeComponent} />
       </div>
@@ -36,15 +36,15 @@ export function BriefingPhase() {
         <button
           data-testid="briefing-play"
           onClick={beginCountdown}
-          className="font-pixel font-bold text-[15px] tracking-[0.15em] text-white rounded-2xl py-5 w-full transition active:translate-y-px"
+          className="font-pixel font-bold text-[15px] tracking-[0.15em] text-white rounded-full py-5 w-full transition active:translate-y-px shadow-vt-tile"
           style={{
-            background: 'linear-gradient(135deg,#22d3ee,#2563eb)',
-            boxShadow: '0 0 22px rgba(34,211,238,.55), inset 0 2px 0 rgba(255,255,255,.35), inset 0 -3px 0 rgba(0,0,0,.25)',
+            background: 'linear-gradient(135deg,#46AEF7,#2E92DD)',
+            boxShadow: '0 6px 14px rgba(70,174,247,.30), inset 0 2px 0 rgba(255,255,255,.45)',
           }}
         >
           PLAY
         </button>
-        <div className="text-zinc-600 text-[11px] mt-3">3 lives · Play starts the countdown</div>
+        <div className="text-vt-dim text-[11px] mt-3">3 lives · Play starts the countdown</div>
 
         {/* Opt out of this puzzle's instructions (persisted as a user setting). */}
         <button
@@ -53,7 +53,7 @@ export function BriefingPhase() {
           aria-checked={dontShowAgain}
           data-testid="briefing-dont-show"
           onClick={() => setBriefingHidden(activeComponent, !dontShowAgain)}
-          className="mt-4 mx-auto flex items-center gap-2 text-zinc-400 hover:text-zinc-200 transition-colors"
+          className="mt-4 mx-auto flex items-center gap-2 text-vt-dim hover:text-vt-text transition-colors"
         >
           <span
             className={`grid place-items-center w-[18px] h-[18px] rounded border-2 transition-colors ${
@@ -61,7 +61,7 @@ export function BriefingPhase() {
             }`}
           >
             {dontShowAgain && (
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06121a" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12l5 5L20 6" />
               </svg>
             )}

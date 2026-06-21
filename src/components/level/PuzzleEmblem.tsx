@@ -36,7 +36,7 @@ export function PuzzleEmblem({ component, label, score, showPill, soon }: Puzzle
         className="absolute inset-0 w-full h-full"
         viewBox="0 0 124 132"
         preserveAspectRatio="none"
-        style={{ filter: `drop-shadow(0 3px 5px rgba(0,0,0,0.5)) drop-shadow(0 0 6px ${t.accent}66)` }}
+        style={{ filter: `drop-shadow(0 3px 5px rgba(217,150,120,0.30)) drop-shadow(0 0 6px ${t.accent}44)` }}
       >
         <path d={SHIELD_PATH} fill="none" stroke={t.accent} strokeWidth="3" />
         <path d={SHIELD_INNER} fill="none" stroke={t.accent} strokeWidth="1" opacity="0.45" />
@@ -49,9 +49,9 @@ export function PuzzleEmblem({ component, label, score, showPill, soon }: Puzzle
       <svg
         viewBox="0 0 160 40"
         className="absolute left-1/2 -translate-x-1/2"
-        style={{ bottom: 4, width: 142, filter: 'drop-shadow(0 2px 3px rgba(0,0,0,0.5))' }}
+        style={{ bottom: 4, width: 142, filter: 'drop-shadow(0 2px 3px rgba(217,150,120,0.35))' }}
       >
-        <path d="M4 7 L156 7 L147 22 L156 37 L4 37 L13 22 Z" fill={t.banner} stroke="rgba(255,255,255,0.4)" strokeWidth="1.4" />
+        <path d="M4 7 L156 7 L147 22 L156 37 L4 37 L13 22 Z" fill={t.banner} stroke="rgba(255,255,255,0.55)" strokeWidth="1.4" />
         <text
           x="80" y="23" textAnchor="middle" dominantBaseline="central" fill="#fff"
           fontFamily="ui-sans-serif, system-ui, sans-serif" fontWeight="900" fontSize="12.5" letterSpacing=".3"
@@ -65,12 +65,12 @@ export function PuzzleEmblem({ component, label, score, showPill, soon }: Puzzle
           className="emblem-pill absolute z-10 rounded-full"
           style={{
             top: 4, right: -4, padding: '2px 9px',
-            background: score > 0 ? t.accent : '#0b1622',
-            border: `2px solid ${score > 0 ? '#030712' : `${t.accent}88`}`,
-            boxShadow: score > 0 ? `0 0 10px ${t.accent}cc` : undefined,
+            background: score > 0 ? t.accent : '#FFFFFF',
+            border: `2px solid ${score > 0 ? '#FFFFFF' : `${t.accent}88`}`,
+            boxShadow: score > 0 ? `0 3px 8px ${t.accent}66` : '0 2px 6px rgba(217,150,120,0.25)',
           }}
         >
-          <span style={{ fontWeight: 900, fontSize: score > 0 ? 13 : 11, color: score > 0 ? '#04121a' : t.accent }}>
+          <span style={{ fontWeight: 900, fontSize: score > 0 ? 13 : 11, color: score > 0 ? '#FFFFFF' : t.accent }}>
             {pill}
           </span>
         </div>

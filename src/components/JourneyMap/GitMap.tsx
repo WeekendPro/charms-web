@@ -141,7 +141,7 @@ export function GitMap() {
       style={{
         height: 'calc(100dvh - 120px)',
         backgroundImage:
-          'radial-gradient(circle at 1px 1px, rgba(255,255,255,.05) 1px, transparent 0), radial-gradient(140% 90% at 30% 100%, #0c1838 0%, #070b16 60%)',
+          'radial-gradient(circle at 1px 1px, rgba(180,120,90,.10) 1px, transparent 0), radial-gradient(140% 90% at 30% 100%, #FFF4E9 0%, #FBEFE6 60%)',
         backgroundSize: '30px 30px, cover',
       }}
     >
@@ -160,10 +160,10 @@ export function GitMap() {
               ) : n.cleared ? (
                 <circle cx={n.x} cy={n.y} r={R} fill={n.accent} />
               ) : (
-                <circle cx={n.x} cy={n.y} r={10} fill="#0c1326" stroke="#2b3a5c" strokeWidth={2} />
+                <circle cx={n.x} cy={n.y} r={10} fill="#FFF1E8" stroke="#E0C3AE" strokeWidth={2} />
               )}
               {n.id === selected && (
-                <circle cx={n.x} cy={n.y} r={R + 8} fill="none" stroke="#fff" strokeWidth={2} opacity={0.9} />
+                <circle cx={n.x} cy={n.y} r={R + 8} fill="none" stroke="#46383B" strokeWidth={2} opacity={0.55} />
               )}
             </g>
           ))}
@@ -174,26 +174,26 @@ export function GitMap() {
       <div
         ref={cardRef}
         data-card
-        className="absolute z-10 w-[188px] rounded-2xl border border-arcade-edge p-3.5 shadow-xl"
-        style={{ background: 'linear-gradient(180deg,#0f1834,#0a0f22)' }}
+        className="absolute z-10 w-[188px] rounded-2xl border border-arcade-edge p-3.5 shadow-vt-pop"
+        style={{ background: '#FFFFFF' }}
       >
-        <div className="text-base font-extrabold text-white">{GIT_TRACKS[selTrack].label} {String(selLevel).padStart(2, '0')}</div>
+        <div className="text-base font-extrabold text-vt-text">{GIT_TRACKS[selTrack].label} {String(selLevel).padStart(2, '0')}</div>
         <div className="my-2.5 flex items-center gap-4">
-          <div className="text-[11px] font-bold text-zinc-400">Best<b className="mt-0.5 block text-[17px] text-white">{best > 0 ? `${best}%` : '—'}</b></div>
-          <div className="text-[11px] font-bold text-zinc-400">Difficulty
+          <div className="text-[11px] font-bold text-vt-dim">Best<b className="mt-0.5 block text-[17px] text-vt-text">{best > 0 ? `${best}%` : '—'}</b></div>
+          <div className="text-[11px] font-bold text-vt-dim">Difficulty
             <div className="mt-1 flex gap-[3px]">
               {Array.from({ length: 5 }, (_, i) => (
-                <i key={i} className="h-[5px] w-[13px] rounded" style={{ background: i < pips ? selNode.accent : '#243049' }} />
+                <i key={i} className="h-[5px] w-[13px] rounded" style={{ background: i < pips ? selNode.accent : '#F0E0D4' }} />
               ))}
             </div>
           </div>
         </div>
         <button
           onClick={play}
-          className={`w-full rounded-xl py-3 text-sm font-extrabold ${playable ? 'text-[#04140a]' : 'text-zinc-400'}`}
+          className={`w-full rounded-xl py-3 text-sm font-extrabold ${playable ? 'text-white' : 'text-vt-dim'}`}
           style={playable
-            ? { background: 'linear-gradient(180deg,#22c55e,#16a34a)' }
-            : { background: '#16203a' }}
+            ? { background: 'linear-gradient(180deg,#3FE0AE,#2FD09B)' }
+            : { background: '#FFF1E8' }}
           disabled={!playable}
         >
           {selNode.current ? '▶ Play' : selNode.cleared ? '↺ Replay' : 'Locked'}
@@ -201,17 +201,17 @@ export function GitMap() {
       </div>
 
       {/* Bottom dock: legend + zoom controls */}
-      <div className="absolute inset-x-3.5 bottom-3.5 z-10 flex items-center justify-between gap-2.5 rounded-2xl border border-arcade-edge bg-[rgba(10,15,26,.92)] px-3 py-2.5">
-        <div className="flex gap-3 text-[10.5px] font-semibold text-zinc-400">
-          <span className="flex items-center gap-1.5"><span className="h-[11px] w-[11px] rounded-full bg-white" style={{ boxShadow: '0 0 0 3px rgba(56,189,248,.4)' }} />Here</span>
-          <span className="flex items-center gap-1.5"><span className="h-[11px] w-[11px] rounded-full" style={{ background: '#38bdf8' }} />Cleared</span>
-          <span className="flex items-center gap-1.5"><span className="h-[11px] w-[11px] rounded-full border-2 border-[#2b3a5c] bg-[#0c1326]" />Locked</span>
+      <div className="absolute inset-x-3.5 bottom-3.5 z-10 flex items-center justify-between gap-2.5 rounded-2xl border border-arcade-edge bg-[rgba(255,255,255,.92)] px-3 py-2.5 shadow-vt-tile">
+        <div className="flex gap-3 text-[10.5px] font-semibold text-vt-dim">
+          <span className="flex items-center gap-1.5"><span className="h-[11px] w-[11px] rounded-full bg-white" style={{ boxShadow: '0 0 0 3px rgba(70,174,247,.4)' }} />Here</span>
+          <span className="flex items-center gap-1.5"><span className="h-[11px] w-[11px] rounded-full" style={{ background: '#46AEF7' }} />Cleared</span>
+          <span className="flex items-center gap-1.5"><span className="h-[11px] w-[11px] rounded-full border-2 border-[#E0C3AE] bg-[#FFF1E8]" />Locked</span>
         </div>
         <div className="flex gap-1.5">
-          <button onClick={() => { const w = wrapRef.current!; zoomAt(w.clientWidth / 2, w.clientHeight / 2, 1 / 1.3) }} className="grid h-8 w-8 place-items-center rounded-lg border border-arcade-edge bg-[#0c1326] font-extrabold text-zinc-200">−</button>
-          <button onClick={fit} className="grid h-8 w-8 place-items-center rounded-lg border border-arcade-edge bg-[#0c1326] text-zinc-200" title="Fit">⤢</button>
-          <button onClick={findMe} className="grid h-8 w-8 place-items-center rounded-lg border border-arcade-edge bg-[#0c1326] text-zinc-200" title="Find me">◎</button>
-          <button onClick={() => { const w = wrapRef.current!; zoomAt(w.clientWidth / 2, w.clientHeight / 2, 1.3) }} className="grid h-8 w-8 place-items-center rounded-lg border border-arcade-edge bg-[#0c1326] font-extrabold text-zinc-200">+</button>
+          <button onClick={() => { const w = wrapRef.current!; zoomAt(w.clientWidth / 2, w.clientHeight / 2, 1 / 1.3) }} className="grid h-8 w-8 place-items-center rounded-lg border border-arcade-edge bg-vt-filled font-extrabold text-vt-text">−</button>
+          <button onClick={fit} className="grid h-8 w-8 place-items-center rounded-lg border border-arcade-edge bg-vt-filled text-vt-text" title="Fit">⤢</button>
+          <button onClick={findMe} className="grid h-8 w-8 place-items-center rounded-lg border border-arcade-edge bg-vt-filled text-vt-text" title="Find me">◎</button>
+          <button onClick={() => { const w = wrapRef.current!; zoomAt(w.clientWidth / 2, w.clientHeight / 2, 1.3) }} className="grid h-8 w-8 place-items-center rounded-lg border border-arcade-edge bg-vt-filled font-extrabold text-vt-text">+</button>
         </div>
       </div>
     </div>

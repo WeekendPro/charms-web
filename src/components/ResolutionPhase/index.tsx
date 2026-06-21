@@ -285,7 +285,7 @@ export function ResolutionPhase() {
       {/* Action button pinned to the bottom of the screen — always tappable
           without scrolling, with a gradient scrim so content scrolls under it. */}
       {stage === 'cta' && !isJourney && (
-        <div className="fixed inset-x-0 bottom-0 z-30 flex justify-center px-4 pb-4 pt-10 bg-gradient-to-t from-gray-950 via-gray-950 to-transparent pointer-events-none">
+        <div className="fixed inset-x-0 bottom-0 z-30 flex justify-center px-4 pb-4 pt-10 bg-gradient-to-t from-vt-void via-vt-void to-transparent pointer-events-none">
           <div className="w-full max-w-sm pointer-events-auto">
             <NextRoundButton show onClick={handleCta} label={ctaLabel} variant={ctaVariant} />
           </div>
@@ -302,7 +302,7 @@ export function ResolutionPhase() {
           ...(showNext ? [<IconButton key="next" label="Next Level" accent="green" onClick={() => nextGitLevel()}>{ForwardIcon}</IconButton>] : []),
         ]
         return (
-          <div className="fixed inset-x-0 bottom-0 z-30 flex justify-center px-4 pb-4 pt-10 bg-gradient-to-t from-gray-950 via-gray-950 to-transparent pointer-events-none">
+          <div className="fixed inset-x-0 bottom-0 z-30 flex justify-center px-4 pb-4 pt-10 bg-gradient-to-t from-vt-void via-vt-void to-transparent pointer-events-none">
             <div
               className="w-full max-w-sm pointer-events-auto grid gap-3"
               style={{ gridTemplateColumns: `repeat(${buttons.length}, minmax(0, 1fr))` }}
@@ -322,7 +322,7 @@ export function ResolutionPhase() {
           ...(showNext ? [<IconButton key="next" label="Next Level" accent="green" onClick={() => goNextLevel()}>{ForwardIcon}</IconButton>] : []),
         ]
         return (
-          <div className="fixed inset-x-0 bottom-0 z-30 flex justify-center px-4 pb-4 pt-10 bg-gradient-to-t from-gray-950 via-gray-950 to-transparent pointer-events-none">
+          <div className="fixed inset-x-0 bottom-0 z-30 flex justify-center px-4 pb-4 pt-10 bg-gradient-to-t from-vt-void via-vt-void to-transparent pointer-events-none">
             <div
               className="w-full max-w-sm pointer-events-auto grid gap-3"
               style={{ gridTemplateColumns: `repeat(${buttons.length}, minmax(0, 1fr))` }}

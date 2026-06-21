@@ -73,7 +73,7 @@ export function LevelScreen() {
   }))
 
   return (
-    <div className="min-h-dvh bg-arcade-bg text-white arcade-scanlines px-5 py-5">
+    <div className="min-h-dvh bg-arcade-glow text-vt-text arcade-scanlines px-5 py-5">
       <ScanlineOverlay />
 
       {/* Back button */}
@@ -83,7 +83,7 @@ export function LevelScreen() {
 
       {error && (
         <div className="text-center py-10">
-          <p className="text-gray-400 mb-4">Couldn't load this level.</p>
+          <p className="text-vt-dim mb-4">Couldn't load this level.</p>
           <NeonButton variant="primary" size="sm" onClick={load}>Retry</NeonButton>
         </div>
       )}

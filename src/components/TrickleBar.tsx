@@ -20,7 +20,7 @@ interface Props {
 export function TrickleBar({
   active,
   delay = 120,
-  color = 'bg-cyan-400',
+  color = 'bg-vt-cyan',
   height = 'h-0.5',
   className = '',
 }: Props) {

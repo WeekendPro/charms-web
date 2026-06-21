@@ -63,19 +63,19 @@ export function SelectingPhase() {
       <ArcadePanel className="p-3">
         <div className="flex justify-between items-center mb-2">
           <span className="font-pixel text-[10px] tracking-[0.15em] uppercase text-neon-cyan">Your Selection</span>
-          <span className="text-[10px] text-gray-500">tap selected to decrement</span>
+          <span className="text-[10px] text-vt-dim">tap selected to decrement</span>
         </div>
         <div className="flex gap-2 flex-wrap min-h-[52px] items-center">
           {orderMatters ? (
             <>
               {selection.map((entry, i) => (
                 <div key={i} className="flex flex-col items-center gap-1 p-2 rounded-md border-2 border-neon-cyan bg-arcade-well text-neon-cyan">
-                  <span className="font-pixel text-[9px] text-gray-400">{i + 1}</span>
+                  <span className="font-pixel text-[9px] text-vt-dim">{i + 1}</span>
                   <PieceShape pieceType={entry.pieceType} cellSize={11} />
                 </div>
               ))}
               {selection.length === 0 && (
-                <span className="text-xs text-gray-600 italic">Tap pieces in order</span>
+                <span className="text-xs text-vt-dim italic">Tap pieces in order</span>
               )}
               {selection.length > 0 && (
                 <button
@@ -105,7 +105,7 @@ export function SelectingPhase() {
                 </button>
               ))}
               {selection.length === 0 && (
-                <span className="text-xs text-gray-600 italic">No pieces selected</span>
+                <span className="text-xs text-vt-dim italic">No pieces selected</span>
               )}
             </>
           )}
@@ -117,15 +117,15 @@ export function SelectingPhase() {
           {/* Active-pick status line */}
           <div
             className={`text-center text-xs rounded-md border px-3 py-2 ${
-              active ? 'border-neon-cyan/60 bg-white/[0.03] text-gray-300' : 'border-arcade-edge text-gray-500'
+              active ? 'border-neon-cyan bg-arcade-well text-vt-text' : 'border-arcade-edge text-vt-dim'
             }`}
           >
             {active === undefined ? (
               'Pick a piece or a color to start.'
             ) : isPieceType(active) ? (
-              <>Piece <b className="text-white">{active}</b> active — tap a color to add it.</>
+              <>Piece <b className="text-vt-text">{active}</b> active — tap a color to add it.</>
             ) : (
-              <>Color <b className="text-white capitalize">{active}</b> active — tap a piece to add it.</>
+              <>Color <b className="text-vt-text capitalize">{active}</b> active — tap a piece to add it.</>
             )}
           </div>
 
@@ -133,7 +133,7 @@ export function SelectingPhase() {
           <ArcadePanel className="p-3">
             <div className="flex justify-between items-center mb-2">
               <span className="font-pixel text-[10px] tracking-[0.15em] uppercase text-neon-cyan">Pieces</span>
-              <span className="text-[10px] text-gray-500">tap to activate</span>
+              <span className="text-[10px] text-vt-dim">tap to activate</span>
             </div>
             <div className="grid grid-cols-7 gap-1.5">
               {PIECE_DEFINITIONS.map(def => {
@@ -146,11 +146,11 @@ export function SelectingPhase() {
                     onClick={() => clickPiece(def.type as PieceType)}
                     className={`flex items-center justify-center p-1 rounded-md border-2 cursor-pointer transition ${
                       on
-                        ? 'border-white bg-arcade-well shadow-[0_0_0_2px_#fff,0_0_14px_rgba(255,255,255,0.5)]'
+                        ? 'border-neon-cyan bg-arcade-well shadow-vt-cyan'
                         : 'border-arcade-edge bg-arcade-well hover:border-neon-cyan/50'
                     }`}
                   >
-                    <PieceShape pieceType={def.type} cellSize={8} colorClass={on ? 'bg-gray-100' : 'bg-gray-500'} />
+                    <PieceShape pieceType={def.type} cellSize={8} colorClass={on ? 'bg-vt-text' : 'bg-vt-faint'} />
                   </button>
                 )
               })}
@@ -161,7 +161,7 @@ export function SelectingPhase() {
           <ArcadePanel className="p-3">
             <div className="flex justify-between items-center mb-2">
               <span className="font-pixel text-[10px] tracking-[0.15em] uppercase text-neon-cyan">Colors</span>
-              <span className="text-[10px] text-gray-500">tap to activate</span>
+              <span className="text-[10px] text-vt-dim">tap to activate</span>
             </div>
             <div className="grid grid-cols-5 gap-2">
               {GAP_COLOR_IDS.map(colorId => {
@@ -174,7 +174,7 @@ export function SelectingPhase() {
                     onClick={() => clickColor(colorId)}
                     className={`aspect-square rounded-md border-2 cursor-pointer transition p-1 ${
                       on
-                        ? 'border-white shadow-[0_0_0_2px_#fff,0_0_16px_rgba(255,255,255,0.6)]'
+                        ? 'border-vt-text shadow-vt-tile'
                         : 'border-arcade-edge hover:opacity-90'
                     }`}
                   >
@@ -189,7 +189,7 @@ export function SelectingPhase() {
         <ArcadePanel className="p-3">
           <div className="flex justify-between items-center mb-2">
             <span className="font-pixel text-[10px] tracking-[0.15em] uppercase text-neon-cyan">Pieces</span>
-            <span className="text-[10px] text-gray-500">tap to increment</span>
+            <span className="text-[10px] text-vt-dim">tap to increment</span>
           </div>
           {orderMatters ? (
             <div className="grid grid-cols-4 gap-2">
@@ -202,7 +202,7 @@ export function SelectingPhase() {
                     rounded-md hover:border-neon-cyan cursor-pointer"
                 >
                   <PieceShape pieceType={def.type} cellSize={11} />
-                  <span className="font-pixel text-[9px] text-gray-400">{def.type}</span>
+                  <span className="font-pixel text-[9px] text-vt-dim">{def.type}</span>
                 </button>
               ))}
             </div>
@@ -216,7 +216,7 @@ export function SelectingPhase() {
                     rounded-md hover:border-neon-cyan cursor-pointer"
                 >
                   <PieceShape pieceType={def.type} cellSize={11} />
-                  <span className="font-pixel text-[9px] text-gray-400">{def.type}</span>
+                  <span className="font-pixel text-[9px] text-vt-dim">{def.type}</span>
                 </button>
               ))}
             </div>

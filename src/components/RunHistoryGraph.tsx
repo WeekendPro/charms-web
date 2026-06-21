@@ -139,12 +139,12 @@ function Sparkline({ window: win, allRecords, metric, currentId, selectedIdx, on
           <>
             <line
               x1={PAD_L} y1={yOf(avg)} x2={W - PAD_R} y2={yOf(avg)}
-              stroke="#8A8AA0" strokeOpacity={0.42} strokeDasharray="2 3"
+              stroke="#9B8B8E" strokeOpacity={0.5} strokeDasharray="2 3"
             />
             <text
               x={PAD_L + 1} y={yOf(avg) - 3}
               fontSize={8} fontFamily="Space Grotesk, sans-serif"
-              letterSpacing="0.06em" fill="#8A8AA0" fillOpacity={0.75}
+              letterSpacing="0.06em" fill="#9B8B8E" fillOpacity={0.85}
             >
               AVG
             </text>
@@ -206,7 +206,7 @@ function Sparkline({ window: win, allRecords, metric, currentId, selectedIdx, on
             </circle>
             <circle
               cx={curPt.x} cy={curPt.y} r={4.2}
-              fill="#06060B"
+              fill="#FFFFFF"
               stroke={metric.hex}
               strokeWidth={2.5}
               filter={`drop-shadow(0 0 6px ${metric.hex})`}
@@ -271,11 +271,11 @@ function RankChip({ pt, metric, rank, svgWidth, svgHeight }: RankChipProps) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end',
-        background: '#0c0c14',
+        background: '#FFFFFF',
         border: `1px solid ${metric.hex}`,
         borderRadius: '9px',
         padding: '5px 9px',
-        boxShadow: `0 0 18px ${metric.hex}33, inset 0 0 0 1px rgba(255,255,255,0.04)`,
+        boxShadow: `0 6px 14px rgba(217,150,120,.22)`,
         whiteSpace: 'nowrap',
         color: metric.hex,
       }}
@@ -290,7 +290,7 @@ function RankChip({ pt, metric, rank, svgWidth, svgHeight }: RankChipProps) {
           transform: 'translateY(-50%) rotate(45deg)',
           width: '8px',
           height: '8px',
-          background: '#0c0c14',
+          background: '#FFFFFF',
           borderRight: `1px solid ${metric.hex}`,
           borderTop: `1px solid ${metric.hex}`,
         }}
@@ -301,7 +301,6 @@ function RankChip({ pt, metric, rank, svgWidth, svgHeight }: RankChipProps) {
         fontVariantNumeric: 'tabular-nums',
         lineHeight: 1,
         color: metric.hex,
-        textShadow: `0 0 10px ${metric.hex}`,
       }}>
         {ordinal(rank)} best
       </div>
@@ -309,7 +308,7 @@ function RankChip({ pt, metric, rank, svgWidth, svgHeight }: RankChipProps) {
         fontSize: '7.5px',
         letterSpacing: '0.16em',
         textTransform: 'uppercase',
-        color: '#8A8AA0',
+        color: '#9B8B8E',
         marginTop: '3px',
       }}>
         all-time
@@ -340,17 +339,17 @@ function InspectCard({ pt, metric, svgWidth, svgHeight }: InspectCardProps) {
         transform: 'translate(-50%, -122%)',
         pointerEvents: 'none',
         opacity: 1,
-        background: '#0c0c14ee',
-        border: '1px solid rgba(255,255,255,0.12)',
+        background: 'rgba(255,255,255,0.96)',
+        border: '1px solid #F0E0D4',
         borderRadius: '9px',
         padding: '8px 10px',
-        boxShadow: '0 8px 24px rgba(0,0,0,0.68)',
+        boxShadow: '0 14px 30px rgba(214,140,110,.26)',
         zIndex: 6,
         whiteSpace: 'nowrap',
         backdropFilter: 'blur(4px)',
       }}
     >
-      <div style={{ fontSize: '8px', letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4A4A5C' }}>
+      <div style={{ fontSize: '8px', letterSpacing: '0.14em', textTransform: 'uppercase', color: '#9B8B8E' }}>
         {when} · run {pt.trueRunNumber}
       </div>
       <div style={{
@@ -359,7 +358,7 @@ function InspectCard({ pt, metric, svgWidth, svgHeight }: InspectCardProps) {
       }}>
         {formatMetric(metric, pt.record[metric.key])}
       </div>
-      <div style={{ fontSize: '9px', color: '#8A8AA0', marginTop: '3px', fontVariantNumeric: 'tabular-nums' }}>
+      <div style={{ fontSize: '9px', color: '#9B8B8E', marginTop: '3px', fontVariantNumeric: 'tabular-nums' }}>
         {pt.record.score} pts · ×{pt.record.combo} · {pt.record.accuracy}%
       </div>
     </div>
@@ -385,9 +384,9 @@ function Ladder({ records, metric, currentId }: LadderProps) {
         const you = row.isCurrent
         const barWidth = maxVal > 0 ? Math.round((row.record[metric.key] / maxVal) * 100) : 0
         const barFill = you
-          ? 'linear-gradient(90deg, rgba(40,240,255,0.4), #28F0FF)'
+          ? 'linear-gradient(90deg, rgba(70,174,247,0.5), #46AEF7)'
           : `linear-gradient(90deg, ${metric.hex}55, ${metric.hex})`
-        const barGlow = you ? '#28F0FF' : metric.hex
+        const barGlow = you ? '#46AEF7' : metric.hex
         const when = relativeTime(new Date(row.record.playedAt).toISOString())
 
         return (
@@ -401,26 +400,25 @@ function Ladder({ records, metric, currentId }: LadderProps) {
               padding: '8px 11px',
               borderRadius: '10px',
               background: you
-                ? 'linear-gradient(90deg, rgba(40,240,255,0.09), rgba(40,240,255,0.02))'
-                : 'rgba(255,255,255,0.02)',
-              border: you ? '1px solid rgba(40,240,255,0.33)' : '1px solid rgba(255,255,255,0.04)',
-              boxShadow: you ? '0 0 20px rgba(40,240,255,0.11)' : 'none',
+                ? 'linear-gradient(90deg, rgba(70,174,247,0.12), rgba(70,174,247,0.03))'
+                : '#FFF1E8',
+              border: you ? '1px solid rgba(70,174,247,0.4)' : '1px solid #F0E0D4',
+              boxShadow: you ? '0 6px 14px rgba(217,150,120,.22)' : 'none',
             }}
           >
             {/* Rank */}
             <div style={{
               fontSize: '12px', fontWeight: 700, fontVariantNumeric: 'tabular-nums',
-              color: you ? '#28F0FF' : '#4A4A5C', width: '24px',
-              textShadow: you ? '0 0 8px #28F0FF' : 'none',
+              color: you ? '#46AEF7' : '#9B8B8E', width: '24px',
             }}>
               {row.rank}
             </div>
             {/* When label */}
-            <div style={{ fontSize: '9px', color: '#4A4A5C', width: '72px', letterSpacing: '0.04em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            <div style={{ fontSize: '9px', color: '#9B8B8E', width: '72px', letterSpacing: '0.04em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {when}
             </div>
             {/* Bar */}
-            <div style={{ flex: 1, height: '6px', borderRadius: '4px', background: 'rgba(255,255,255,0.05)', overflow: 'hidden' }}>
+            <div style={{ flex: 1, height: '6px', borderRadius: '4px', background: '#FFF1E8', overflow: 'hidden' }}>
               <div style={{
                 display: 'block', height: '100%', borderRadius: '4px',
                 width: `${barWidth}%`,
@@ -432,14 +430,14 @@ function Ladder({ records, metric, currentId }: LadderProps) {
             {/* Value */}
             <div style={{
               fontSize: '12px', fontWeight: 700, fontVariantNumeric: 'tabular-nums',
-              color: you ? '#EAEAF2' : '#8A8AA0', width: '46px', textAlign: 'right',
+              color: you ? '#46383B' : '#9B8B8E', width: '46px', textAlign: 'right',
             }}>
               {formatMetric(metric, row.record[metric.key])}
             </div>
             {/* You tag */}
             <div style={{
               fontSize: '7.5px', letterSpacing: '0.12em', textTransform: 'uppercase',
-              color: '#28F0FF', width: '26px', textAlign: 'right',
+              color: '#46AEF7', width: '26px', textAlign: 'right',
             }}>
               {you ? 'You' : ''}
             </div>
@@ -481,13 +479,13 @@ export function RunHistoryGraph({ records, currentId, recentCount = 14 }: RunHis
                 textTransform: 'uppercase',
                 fontWeight: 600,
                 fontFamily: 'Space Grotesk, sans-serif',
-                color: isActive ? '#06060B' : '#4A4A5C',
-                background: isActive ? m.hex : 'rgba(255,255,255,0.024)',
-                border: isActive ? '1px solid transparent' : '1px solid rgba(255,255,255,0.055)',
+                color: isActive ? '#46383B' : '#9B8B8E',
+                background: isActive ? m.hex : '#FFF1E8',
+                border: isActive ? '1px solid transparent' : '1px solid #F0E0D4',
                 cursor: 'pointer',
                 padding: '7px 4px',
                 borderRadius: '8px',
-                boxShadow: isActive ? `0 0 10px ${m.hex}77` : 'none',
+                boxShadow: isActive ? '0 6px 14px rgba(217,150,120,.22)' : 'none',
                 transition: 'all 0.25s cubic-bezier(0.1, 0.9, 0.2, 1)',
               }}
             >

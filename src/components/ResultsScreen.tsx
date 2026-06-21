@@ -18,12 +18,12 @@ function LevelSummary({
   return (
     <>
       <div className="text-center mb-6">
-        <div className="font-pixel font-bold text-xl uppercase tracking-[0.08em] text-neon-cyan text-glow-cyan mb-1">
+        <div className="font-pixel font-bold text-xl uppercase tracking-[0.08em] text-vt-text mb-1">
           {title}
         </div>
         <div className="text-2xl">
           {[0, 1, 2].map(i => (
-            <span key={i} className={i < stars ? 'text-neon-yellow text-glow-yellow' : 'text-arcade-edge'}>★</span>
+            <span key={i} className={i < stars ? 'text-neon-yellow text-glow-yellow' : 'text-vt-faint'}>★</span>
           ))}
         </div>
       </div>
@@ -31,16 +31,16 @@ function LevelSummary({
       <ArcadePanel className="p-4 mb-6">
         {roundResults.map((total, i) => (
           <div key={i} className="flex justify-between items-baseline mb-2 last:mb-0">
-            <span className="font-pixel text-[9px] uppercase tracking-[0.1em] text-neon-cyan">Round {i + 1}</span>
-            <span className="font-pixel text-[11px] tabular-nums text-white">{total.toLocaleString()}</span>
+            <span className="font-pixel text-[9px] uppercase tracking-[0.1em] text-vt-cyan">Round {i + 1}</span>
+            <span className="font-pixel text-[11px] tabular-nums text-vt-text">{total.toLocaleString()}</span>
           </div>
         ))}
-        <div className="flex justify-between items-baseline mt-2 pt-2 border-t border-arcade-edge">
-          <span className="font-pixel text-[9px] uppercase tracking-[0.1em] text-neon-red">♥ Lives Bonus</span>
-          <span className="font-pixel text-[11px] tabular-nums text-neon-red">{livesBonus(livesRemaining).toLocaleString()}</span>
+        <div className="flex justify-between items-baseline mt-2 pt-2 border-t border-vt-edge">
+          <span className="font-pixel text-[9px] uppercase tracking-[0.1em] text-vt-red">♥ Lives Bonus</span>
+          <span className="font-pixel text-[11px] tabular-nums text-vt-red">{livesBonus(livesRemaining).toLocaleString()}</span>
         </div>
-        <div className="flex justify-between text-sm font-bold pt-2 border-t border-arcade-edge mt-2">
-          <span className="font-pixel text-[10px] uppercase tracking-[0.1em]">Level Total</span>
+        <div className="flex justify-between text-sm font-bold pt-2 border-t border-vt-edge mt-2">
+          <span className="font-pixel text-[10px] uppercase tracking-[0.1em] text-vt-text">Level Total</span>
           <span className="font-pixel font-bold text-neon-yellow text-glow-yellow tabular-nums">{score.toLocaleString()}</span>
         </div>
       </ArcadePanel>
@@ -70,7 +70,7 @@ export function ResultsScreen() {
   const backToMenu = () => { resetGame(); goJourney() }
 
   return (
-    <div className="min-h-dvh bg-arcade-bg text-white flex flex-col items-center px-4 py-8">
+    <div className="min-h-dvh bg-arcade-glow text-vt-text flex flex-col items-center px-4 py-8">
       <div className="w-full max-w-sm">
         <LevelSummary
           title={levelComplete ? 'Level Complete!' : 'Game Over'}

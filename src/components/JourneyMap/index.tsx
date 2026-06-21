@@ -16,7 +16,7 @@ function Stars({ n }: { n: number }) {
   return (
     <span className="text-[10px] tracking-tight" aria-hidden="true">
       {[0, 1, 2, 3, 4].map(i => (
-        <span key={i} className={i < n ? 'text-yellow-400' : 'text-gray-700'}>★</span>
+        <span key={i} className={i < n ? 'text-vt-amber' : 'text-vt-faint'}>★</span>
       ))}
     </span>
   )
@@ -118,7 +118,7 @@ export function TransitMap({
             // The button is a dot-sized square centred on the line coordinate, so the
             // marker always sits exactly on the line. The label is absolutely
             // positioned to one side and doesn't shift the dot.
-            className="absolute -translate-x-1/2 -translate-y-1/2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            className="absolute -translate-x-1/2 -translate-y-1/2 focus:outline-none focus-visible:ring-2 focus-visible:ring-vt-cyan"
             style={{
               left: `${(s.x / VIEWBOX.w) * 100}%`,
               top: `${(s.y / VIEWBOX.h) * 100}%`,
@@ -129,9 +129,9 @@ export function TransitMap({
             {state === 'locked' ? (
               <span
                 className="flex h-full w-full items-center justify-center rounded-full border-2"
-                style={{ borderColor: color, background: '#0b0f1c', opacity: 0.85 }}
+                style={{ borderColor: color, background: '#FFFFFF', opacity: 0.95 }}
               >
-                <LockIcon size={dotSize - 2} color="#cbd5e1" />
+                <LockIcon size={dotSize - 2} color="#9B8B8E" />
               </span>
             ) : (
               <span
@@ -150,10 +150,10 @@ export function TransitMap({
               <span
                 className={`text-[11px] ${
                   state === 'next'
-                    ? 'text-white font-bold'
+                    ? 'text-vt-text font-bold'
                     : state === 'locked'
-                    ? 'text-gray-500'
-                    : 'text-gray-200'
+                    ? 'text-vt-dim'
+                    : 'text-vt-text'
                 }`}
               >
                 {s.name}

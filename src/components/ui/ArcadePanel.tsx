@@ -8,7 +8,7 @@ export function ArcadePanel({ className = '', children, ...rest }: ArcadePanelPr
   return (
     <div
       {...rest}
-      className={['bg-arcade-panel border-2 border-arcade-edge shadow-panel-inset rounded-md', className]
+      className={['bg-vt-panel border border-vt-edge shadow-vt-tile rounded-2xl', className]
         .filter(Boolean)
         .join(' ')}
     >

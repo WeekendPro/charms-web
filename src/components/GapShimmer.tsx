@@ -13,7 +13,7 @@ const SHIMMER_ENABLED = false
 const SWEEP_MS = 2600   // time for the glare band to cross the board (one pass)
 // Soft, cool-white, narrow highlight; screen-blended and masked to the gap shapes,
 // so the glare is only ever visible where it crosses a gap — never the filled board.
-const GLARE = 'linear-gradient(115deg, transparent 42%, rgba(190,230,255,0.55) 50%, transparent 58%)'
+const GLARE = 'linear-gradient(115deg, transparent 42%, rgba(220,240,255,0.40) 50%, transparent 58%)'
 
 /** An alpha mask (white = visible) covering only the gap cells, in board coords. */
 function buildGapMask(rects: { left: number; top: number; size: number }[], w: number, h: number): string {

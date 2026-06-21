@@ -39,24 +39,24 @@ function ScoreStar({ score = 0 }: { score?: number }) {
     <div className="relative w-[46px] h-[46px]">
       {/* Fill area, clipped to the star shape: faint track + gold fill rising from the bottom */}
       <div className="absolute inset-0" style={{ clipPath: STAR_CLIP }}>
-        <div className="absolute inset-0" style={{ background: 'rgba(250,204,21,0.18)' }} />
+        <div className="absolute inset-0" style={{ background: 'rgba(255,206,58,0.20)' }} />
         <div
           className="absolute inset-x-0 bottom-0"
-          style={{ height: `${pct}%`, background: 'linear-gradient(0deg,#f59e0b,#fde047)' }}
+          style={{ height: `${pct}%`, background: 'linear-gradient(0deg,#FFB13C,#FFCE3A)' }}
         />
       </div>
       {/* Crisp star outline (overflow visible so the stroke isn't clipped) */}
       <svg
         className="absolute inset-0 w-full h-full"
         viewBox="0 0 100 100"
-        style={{ overflow: 'visible', filter: 'drop-shadow(0 0 5px rgba(250,204,21,.55))' }}
+        style={{ overflow: 'visible', filter: 'drop-shadow(0 2px 4px rgba(255,177,60,.45))' }}
       >
-        <polygon points={STAR_POINTS} fill="none" stroke="#fbbf24" strokeWidth="5" strokeLinejoin="round" />
+        <polygon points={STAR_POINTS} fill="none" stroke="#FFB13C" strokeWidth="5" strokeLinejoin="round" />
       </svg>
       {/* Score, readable over both the gold fill and the faint track */}
       <span
-        className="absolute inset-0 grid place-items-center text-[11px] font-black text-white"
-        style={{ textShadow: '0 1px 2px rgba(0,0,0,.85), 0 0 2px rgba(0,0,0,.7)' }}
+        className="absolute inset-0 grid place-items-center text-[11px] font-black text-vt-text"
+        style={{ textShadow: '0 1px 2px rgba(255,255,255,.9), 0 0 2px rgba(255,255,255,.8)' }}
       >
         {score}
       </span>
@@ -67,7 +67,7 @@ function ScoreStar({ score = 0 }: { score?: number }) {
 function FooterContent({ state, score }: { state: RibbonBadgeProps['state']; score?: number }) {
   if (state === 'locked') {
     return (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9B8B8E" strokeWidth="2">
         <rect x="4" y="10" width="16" height="11" rx="2" />
         <path d="M8 10V7a4 4 0 0 1 8 0v3" />
       </svg>
@@ -80,7 +80,7 @@ function FooterContent({ state, score }: { state: RibbonBadgeProps['state']; sco
         height="26"
         viewBox="0 0 24 24"
         fill="none"
-        stroke="#a1a1aa"
+        stroke="#CDBFC1"
         strokeWidth="1.6"
         strokeLinejoin="round"
       >
@@ -92,7 +92,7 @@ function FooterContent({ state, score }: { state: RibbonBadgeProps['state']; sco
     return <ScoreStar score={score} />
   }
   // soon
-  return <span className="text-[8px] font-pixel tracking-wider text-zinc-500">SOON</span>
+  return <span className="text-[8px] font-pixel tracking-wider text-vt-dim">SOON</span>
 }
 
 export function RibbonBadge({
@@ -110,8 +110,8 @@ export function RibbonBadge({
 }: RibbonBadgeProps) {
   // Crest accent: green marks The Classic, cyan marks the badges. The banner
   // uses a deeper shade of the same so its white title stays readable.
-  const accent = cardAccent === 'green' ? '#39d98a' : '#22d3ee'
-  const bannerColor = cardAccent === 'green' ? '#16a34a' : '#0e7490'
+  const accent = cardAccent === 'green' ? '#2FD09B' : '#46AEF7'
+  const bannerColor = cardAccent === 'green' ? '#1FA985' : '#2E92DD'
   const vibrant = vibrantProp || state === 'complete'
   // Dim ONLY when the puzzle isn't available yet (locked, or "coming soon").
   // Unlocked puzzles — incomplete or complete — render at full color.
@@ -119,9 +119,9 @@ export function RibbonBadge({
 
   let cardBorderClass: string
   if (cardAccent === 'green') {
-    cardBorderClass = 'border-neon-green shadow-[0_0_14px_rgba(57,217,138,.4)]'
+    cardBorderClass = 'border-neon-green shadow-[0_6px_14px_rgba(47,208,155,.28)]'
   } else if (vibrant) {
-    cardBorderClass = 'border-[#a5f3fc] shadow-[0_0_12px_rgba(34,211,238,.35)]'
+    cardBorderClass = 'border-[#9BD7FB] shadow-[0_6px_14px_rgba(70,174,247,.28)]'
   } else {
     cardBorderClass = 'border-arcade-edge'
   }
@@ -149,7 +149,7 @@ export function RibbonBadge({
             className="absolute inset-0 w-full h-full"
             viewBox="0 0 124 132"
             preserveAspectRatio="none"
-            style={{ filter: `drop-shadow(0 3px 5px rgba(0,0,0,0.5)) drop-shadow(0 0 5px ${accent}44)` }}
+            style={{ filter: `drop-shadow(0 3px 5px rgba(217,150,120,0.30)) drop-shadow(0 0 5px ${accent}33)` }}
           >
             <path d="M62 4 L116 23 V66 C116 99 95 120 62 130 C29 120 8 99 8 66 V23 Z" fill="none" stroke={accent} strokeWidth="3" />
             <path d="M62 13 L108 29 V66 C108 95 89 113 62 122 C35 113 16 95 16 66 V29 Z" fill="none" stroke={accent} strokeWidth="1" opacity="0.45" />
@@ -163,9 +163,9 @@ export function RibbonBadge({
           <svg
             viewBox="0 0 160 40"
             className="absolute left-1/2 -translate-x-1/2"
-            style={{ bottom: '4px', width: '142px', filter: 'drop-shadow(0 2px 3px rgba(0,0,0,0.5))' }}
+            style={{ bottom: '4px', width: '142px', filter: 'drop-shadow(0 2px 3px rgba(217,150,120,0.35))' }}
           >
-            <path d="M4 7 L156 7 L147 22 L156 37 L4 37 L13 22 Z" fill={bannerColor} stroke="rgba(255,255,255,0.4)" strokeWidth="1.4" />
+            <path d="M4 7 L156 7 L147 22 L156 37 L4 37 L13 22 Z" fill={bannerColor} stroke="rgba(255,255,255,0.55)" strokeWidth="1.4" />
             <text
               x="80" y="23" textAnchor="middle" dominantBaseline="central" fill="#fff"
               fontFamily="ui-sans-serif, system-ui, sans-serif" fontWeight="900" fontSize="12.5" letterSpacing=".3"

@@ -34,7 +34,7 @@ export function GapNumbers({ gaps }: Props) {
             key={gi}
             data-gap-number
             className="absolute z-10 flex items-center justify-center font-pixel text-[11px]
-              text-gray-900 bg-gray-100/90 rounded-full w-5 h-5 shadow -translate-x-1/2 -translate-y-1/2"
+              text-vt-text bg-vt-panel/90 rounded-full w-5 h-5 shadow-vt-tile -translate-x-1/2 -translate-y-1/2"
             style={{ left: PAD - GAP / 2 + centerCol * STEP, top: PAD - GAP / 2 + centerRow * STEP }}
           >
             {gap.order}

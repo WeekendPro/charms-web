@@ -24,12 +24,12 @@ export const STATIONS: Record<number, StationCoord> = {
 }
 
 export const LINE_COLOR: Record<DistrictSlug, string> = {
-  the_hollows: '#22d3ee',
-  the_stacks: '#ff2d95',
-  the_grid: '#39d98a',
+  the_hollows: '#46AEF7', // sky
+  the_stacks: '#FF8FCF',  // bubblegum
+  the_grid: '#5BC16E',    // lime
 }
 
-export const CONNECTOR_COLOR = '#33406b'
+export const CONNECTOR_COLOR = '#E0C3AE'
 
 export interface LineDef {
   slug: DistrictSlug

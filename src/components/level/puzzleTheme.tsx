@@ -25,27 +25,27 @@ export interface PuzzleTheme {
 
 export const PUZZLE_THEME: Record<ComponentKey, PuzzleTheme> = {
   main: {
-    accent: '#22d3ee', banner: '#0e7490', shieldBg: BADGE_CENTER_BG.classic,
+    accent: '#46AEF7', banner: '#2E92DD', shieldBg: BADGE_CENTER_BG.classic,
     glyph: <ClassicTetrominoGlyph />,
     note: 'Memorize the gaps, then pick the pieces that fill them.',
   },
   colors: {
-    accent: '#ff2d95', banner: '#9d174d', shieldBg: BADGE_CENTER_BG.quad,
+    accent: '#FF8FCF', banner: '#ED74BC', shieldBg: BADGE_CENTER_BG.quad,
     glyph: <ColorQuadGlyph />,
     note: 'Match each gap by shape and color.',
   },
   inSequence: {
-    accent: '#f59e0b', banner: '#b45309', shieldBg: BADGE_CENTER_BG.seq,
+    accent: '#FFB13C', banner: '#E8842F', shieldBg: BADGE_CENTER_BG.seq,
     glyph: <SequenceBlocksGlyph />,
     note: 'Fill the gaps in numbered order: 1 → 2 → 3.',
   },
   flash: {
-    accent: '#39d98a', banner: '#15803d', shieldBg: BADGE_CENTER_BG.eyes,
+    accent: '#2FD09B', banner: '#1FA985', shieldBg: BADGE_CENTER_BG.eyes,
     glyph: <EyesGlyph />,
     note: 'The board flashes once. Blink and you miss it.',
   },
   riddle: {
-    accent: '#2dd4bf', banner: '#0f766e', shieldBg: BADGE_CENTER_BG.riddle,
+    accent: '#1FC7B6', banner: '#15A99A', shieldBg: BADGE_CENTER_BG.riddle,
     glyph: <RiddleGlyph />,
     note: 'A new kind of puzzle. Coming soon.',
   },

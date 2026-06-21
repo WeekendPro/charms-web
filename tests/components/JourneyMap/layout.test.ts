@@ -23,9 +23,9 @@ describe('JourneyMap layout', () => {
   })
 
   it('defines a colored line per district slug', () => {
-    expect(LINE_COLOR.the_hollows).toBe('#22d3ee')
-    expect(LINE_COLOR.the_stacks).toBe('#ff2d95')
-    expect(LINE_COLOR.the_grid).toBe('#39d98a')
+    expect(LINE_COLOR.the_hollows).toBe('#46AEF7')
+    expect(LINE_COLOR.the_stacks).toBe('#FF8FCF')
+    expect(LINE_COLOR.the_grid).toBe('#5BC16E')
     expect(LINES.map(l => l.slug)).toEqual(['the_hollows', 'the_stacks', 'the_grid'])
   })
 

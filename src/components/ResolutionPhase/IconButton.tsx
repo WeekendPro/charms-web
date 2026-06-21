@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 
 type Accent = 'edge' | 'cyan' | 'green'
 const ACCENT: Record<Accent, string> = {
-  edge: 'border-arcade-edge text-gray-300 hover:border-neon-cyan hover:text-neon-cyan',
+  edge: 'border-arcade-edge text-vt-text hover:border-neon-cyan hover:text-neon-cyan',
   cyan: 'border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10',
   green: 'border-neon-green text-neon-green hover:bg-neon-green/10',
 }
@@ -15,7 +15,7 @@ export function IconButton({
       type="button"
       aria-label={label}
       onClick={onClick}
-      className={`flex flex-col items-center gap-1 py-3 rounded-xl border-2 bg-arcade-panel transition-colors active:translate-y-px ${ACCENT[accent]}`}
+      className={`flex flex-col items-center gap-1 py-3 rounded-xl border-2 bg-arcade-panel shadow-vt-tile transition-colors active:translate-y-px ${ACCENT[accent]}`}
     >
       {children}
       <span className="font-sans text-[11px] font-semibold tracking-tight leading-tight whitespace-nowrap">{label}</span>

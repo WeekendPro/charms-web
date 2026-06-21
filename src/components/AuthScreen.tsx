@@ -10,7 +10,7 @@ import { VanishingMotif } from './ui/VanishingMotif'
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="relative">
-      <span className="absolute -top-[7px] left-3 z-10 px-1.5 bg-vt-panel font-grotesk text-[9px] tracking-[0.12em] uppercase text-vt-faint">
+      <span className="absolute -top-[7px] left-3 z-10 px-1.5 bg-vt-panel font-grotesk text-[9px] tracking-[0.12em] uppercase text-vt-dim">
         {label}
       </span>
       {children}
@@ -41,17 +41,17 @@ export function AuthScreen() {
 
   const canSubmit = email.trim().length > 0 && password.length > 0 && !busy
 
-  // Lit-hardware input: dark fill, faint edge, cyan focus glow.
+  // Light field: sunken warm fill, hairline edge, sky focus ring.
   const inputClass =
-    'w-full h-12 px-3.5 rounded-[11px] bg-[#0a0a12] text-vt-text font-grotesk text-sm ' +
-    'border border-white/10 placeholder-vt-faint shadow-[inset_0_1px_2px_#000] ' +
+    'w-full h-12 px-3.5 rounded-[11px] bg-vt-filled text-vt-text font-grotesk text-sm ' +
+    'border border-vt-edge placeholder-vt-faint ' +
     'focus:outline-none focus:border-vt-cyan ' +
-    'focus:shadow-[inset_0_1px_2px_#000,0_0_0_1px_rgba(40,240,255,0.33),0_0_14px_rgba(40,240,255,0.2)] ' +
+    'focus:shadow-[0_0_0_3px_rgba(70,174,247,0.22)] ' +
     'disabled:opacity-50'
 
   return (
     <div className="relative min-h-dvh vt-vignette flex items-center justify-center px-6 overflow-hidden">
-      <div className="relative w-full max-w-sm rounded-[28px] bg-vt-panel border border-white/5 shadow-[0_40px_90px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.05)] px-7 py-9 flex flex-col items-center">
+      <div className="relative w-full max-w-sm rounded-[28px] bg-vt-panel border border-vt-edge shadow-vt-pop px-7 py-9 flex flex-col items-center">
 
         {/* Brand motif: gap shapes bloom, then vanish — the name in motion. */}
         <VanishingMotif className="mb-7" />
@@ -59,7 +59,7 @@ export function AuthScreen() {
         {/* Brand. */}
         <div className="text-center mb-8">
           <Wordmark size="lg" stacked />
-          <p className="mt-2.5 font-grotesk text-[10px] tracking-[0.22em] uppercase text-vt-magenta text-glow-vt-magenta">
+          <p className="mt-2.5 font-grotesk text-[10px] tracking-[0.22em] uppercase text-vt-magenta">
             A memory game
           </p>
         </div>
@@ -94,11 +94,11 @@ export function AuthScreen() {
           <button
             disabled={!canSubmit}
             onClick={() => run(() => signInWithEmail(email, password), true)}
-            className="mt-1 h-12 rounded-[11px] inline-flex items-center justify-center gap-2
-              border-2 border-vt-cyan bg-vt-raised text-vt-cyan
+            className="mt-1 h-12 rounded-full inline-flex items-center justify-center gap-2
+              bg-vt-cyan text-white
               font-grotesk text-[13px] tracking-[0.1em] uppercase
-              shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_0_16px_rgba(40,240,255,0.27)]
-              hover:bg-vt-cyan/10 transition-colors active:translate-y-px
+              shadow-vt-tile
+              hover:brightness-105 transition-all active:translate-y-px
               disabled:opacity-50 disabled:pointer-events-none"
           >
             Enter →
@@ -106,10 +106,10 @@ export function AuthScreen() {
           <button
             disabled={!canSubmit}
             onClick={() => run(() => signUpWithEmail(email, password), true)}
-            className="h-11 rounded-[11px] inline-flex items-center justify-center
-              border border-white/10 bg-vt-raised text-vt-dim
+            className="h-11 rounded-full inline-flex items-center justify-center
+              border border-vt-edge bg-vt-panel text-vt-dim
               font-grotesk text-[12px] tracking-[0.06em]
-              hover:text-vt-text hover:border-white/20 transition-colors active:translate-y-px
+              hover:text-vt-text hover:border-vt-cyan transition-colors active:translate-y-px
               disabled:opacity-50 disabled:pointer-events-none"
           >
             Create account
@@ -117,20 +117,20 @@ export function AuthScreen() {
 
           {/* Divider. */}
           <div className="flex items-center gap-3 my-2 font-grotesk text-[10px] tracking-[0.14em] uppercase text-vt-faint">
-            <span className="h-px flex-1 bg-white/10" />
+            <span className="h-px flex-1 bg-vt-edge" />
             <span>or</span>
-            <span className="h-px flex-1 bg-white/10" />
+            <span className="h-px flex-1 bg-vt-edge" />
           </div>
 
           {/* Google OAuth — outlined. */}
           <button
             disabled={busy}
             onClick={() => run(signInWithGoogle, false)}
-            className="h-12 rounded-[11px] inline-flex items-center justify-center gap-2
-              border-2 border-white/15 bg-vt-raised text-vt-text
+            className="h-12 rounded-full inline-flex items-center justify-center gap-2
+              border border-vt-edge bg-vt-panel text-vt-text
               font-grotesk text-[12px] tracking-[0.04em]
-              shadow-[inset_0_1px_0_rgba(255,255,255,0.07)]
-              hover:border-white/30 transition-colors active:translate-y-px
+              shadow-vt-tile
+              hover:border-vt-cyan transition-colors active:translate-y-px
               disabled:opacity-50 disabled:pointer-events-none"
           >
             <svg width="16" height="16" viewBox="0 0 18 18" aria-hidden="true" className="shrink-0">
@@ -153,7 +153,7 @@ export function AuthScreen() {
             <span className="text-vt-cyan border-b border-vt-cyan/40">Continue as guest</span>
           </button>
 
-          {error && <p className="font-grotesk text-vt-red text-glow-vt-red text-sm text-center mt-2">{error}</p>}
+          {error && <p className="font-grotesk text-vt-red text-sm text-center mt-2">{error}</p>}
         </div>
       </div>
     </div>

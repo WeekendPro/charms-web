@@ -54,28 +54,28 @@ describe('METRICS', () => {
 
   it('score has correct hex and no prefix/suffix', () => {
     const m = METRICS.find(m => m.key === 'score')!
-    expect(m.hex).toBe('#FFC23D')
+    expect(m.hex).toBe('#FFB13C')
     expect(m.prefix).toBeUndefined()
     expect(m.suffix).toBeUndefined()
   })
 
   it('recalled has correct hex and no prefix/suffix', () => {
     const m = METRICS.find(m => m.key === 'recalled')!
-    expect(m.hex).toBe('#FF2D9B')
+    expect(m.hex).toBe('#FF8FCF')
     expect(m.prefix).toBeUndefined()
     expect(m.suffix).toBeUndefined()
   })
 
   it('combo has correct hex and prefix × and no suffix', () => {
     const m = METRICS.find(m => m.key === 'combo')!
-    expect(m.hex).toBe('#B6FF3C')
+    expect(m.hex).toBe('#5BC16E')
     expect(m.prefix).toBe('×')
     expect(m.suffix).toBeUndefined()
   })
 
   it('accuracy has correct hex and suffix % and no prefix', () => {
     const m = METRICS.find(m => m.key === 'accuracy')!
-    expect(m.hex).toBe('#28F0FF')
+    expect(m.hex).toBe('#46AEF7')
     expect(m.prefix).toBeUndefined()
     expect(m.suffix).toBe('%')
   })

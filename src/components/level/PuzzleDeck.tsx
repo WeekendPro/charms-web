@@ -90,7 +90,7 @@ export function PuzzleDeck({ puzzles, onPlay }: PuzzleDeckProps) {
             <span
               key={p.component}
               className="w-2 h-2 rounded-full transition"
-              style={{ background: on ? accent : '#334155', boxShadow: on ? `0 0 6px ${accent}` : undefined }}
+              style={{ background: on ? accent : '#E7D4C6', boxShadow: on ? `0 0 6px ${accent}55` : undefined }}
             />
           )
         })}

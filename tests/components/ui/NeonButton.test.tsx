@@ -9,24 +9,24 @@ describe('NeonButton', () => {
     expect(screen.getByRole('button', { name: /Done/i })).toBeInTheDocument()
   })
 
-  it('defaults to the primary (cyan) variant', () => {
+  it('defaults to the primary (candy sky) variant', () => {
     render(<NeonButton>Play</NeonButton>)
     const btn = screen.getByRole('button', { name: /Play/i })
-    expect(btn.className).toContain('border-neon-cyan')
-    expect(btn.className).toContain('shadow-neon-cyan')
+    expect(btn.className).toContain('bg-vt-cyan')
+    expect(btn.className).toContain('text-white')
     expect(btn.className).toContain('font-pixel')
   })
 
-  it('applies the go (green) variant classes', () => {
+  it('applies the go (mint) variant classes', () => {
     render(<NeonButton variant="go">Go</NeonButton>)
     const btn = screen.getByRole('button', { name: /Go/i })
-    expect(btn.className).toContain('border-neon-green')
-    expect(btn.className).toContain('shadow-neon-green')
+    expect(btn.className).toContain('bg-vt-lime')
+    expect(btn.className).toContain('shadow-vt-tile')
   })
 
-  it('applies the danger (red) variant classes', () => {
+  it('applies the danger (coral) variant classes', () => {
     render(<NeonButton variant="danger">Sign Out</NeonButton>)
-    expect(screen.getByRole('button', { name: /Sign Out/i }).className).toContain('border-neon-red')
+    expect(screen.getByRole('button', { name: /Sign Out/i }).className).toContain('border-vt-red')
   })
 
   it('adds w-full when fullWidth is set', () => {

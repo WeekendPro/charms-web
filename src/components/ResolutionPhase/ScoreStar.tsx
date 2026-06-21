@@ -171,8 +171,8 @@ export function ScoreStar({ show, score, livesRemaining }: Props) {
         {/* score value */}
         <span
           data-testid="score-star-value"
-          className="absolute inset-0 grid place-items-center font-pixel font-bold tabular-nums text-[20px] text-white"
-          style={{ textShadow: '0 2px 4px rgba(0,0,0,.85)' }}
+          className="absolute inset-0 grid place-items-center font-pixel font-bold tabular-nums text-[20px] text-vt-text"
+          style={{ textShadow: '0 1px 3px rgba(255,255,255,.9)' }}
         >
           {display}
         </span>
@@ -184,7 +184,7 @@ export function ScoreStar({ show, score, livesRemaining }: Props) {
             key={`rain-${i}`}
             data-testid="score-star-sparkle"
             className="absolute left-1/2 top-1/2 rounded-full"
-            style={{ width: 7, height: 7, marginLeft: -3.5, marginTop: -3.5, background: '#fff', boxShadow: '0 0 10px 4px rgba(34,211,238,.9)' }}
+            style={{ width: 7, height: 7, marginLeft: -3.5, marginTop: -3.5, background: '#fff', boxShadow: '0 0 10px 4px rgba(70,174,247,.9)' }}
             initial={{ x: 92 + s.x * 0.15, y: 108, opacity: 0, scale: 0.3 }}
             animate={{ x: s.x * 0.4, y: -6, opacity: [0, 1, 0], scale: [0.3, 1.4, 0.5] }}
             transition={{ duration: 0.8, ease: 'easeIn', repeat: Infinity, repeatDelay: 0.3, delay: s.delay }}
@@ -223,7 +223,7 @@ export function ScoreStar({ show, score, livesRemaining }: Props) {
           transition={{ duration: 0.42, ease: 'easeOut' }}
         >
           <div className="flex justify-between items-center pb-1.5">
-            <span className="font-pixel text-[9px] uppercase tracking-[0.1em] text-gray-400">Lives</span>
+            <span className="font-pixel text-[9px] uppercase tracking-[0.1em] text-vt-dim">Lives</span>
             <span data-testid="acct-lives" className="text-sm leading-none flex gap-0.5">
               {Array.from({ length: MAX_LIVES }, (_, i) => (
                 i >= livesRemaining
@@ -232,7 +232,7 @@ export function ScoreStar({ show, score, livesRemaining }: Props) {
                     <span key={i} className="relative inline-block">
                       <span className="text-neon-red opacity-20">♥</span>
                       <motion.span
-                        className="absolute left-0 top-0 text-neon-red text-glow-red"
+                        className="absolute left-0 top-0 text-neon-red"
                         initial={false}
                         animate={landed > i
                           ? { y: -130, x: -70, opacity: 0, scale: 0.5 }
@@ -255,8 +255,8 @@ export function ScoreStar({ show, score, livesRemaining }: Props) {
           transition={{ duration: 0.42, ease: 'easeOut' }}
         >
           <div className="flex justify-between items-center">
-            <span className="font-pixel text-[9px] uppercase tracking-[0.1em] text-gray-400">Speed</span>
-            <span data-testid="acct-speed" className="font-pixel text-[11px] tabular-nums text-neon-cyan text-glow-cyan">{speedLeft}</span>
+            <span className="font-pixel text-[9px] uppercase tracking-[0.1em] text-vt-dim">Speed</span>
+            <span data-testid="acct-speed" className="font-pixel text-[11px] tabular-nums text-neon-cyan">{speedLeft}</span>
           </div>
         </motion.div>
       </motion.div>
@@ -267,11 +267,11 @@ export function ScoreStar({ show, score, livesRemaining }: Props) {
         className="font-sans font-black italic text-2xl"
         style={{
           letterSpacing: '.5px',
-          background: 'linear-gradient(180deg,#fffbe6,#fde047 55%,#f59e0b)',
+          background: 'linear-gradient(180deg,#FFE9A8,#FFCE3A 55%,#FFB13C)',
           WebkitBackgroundClip: 'text',
           backgroundClip: 'text',
           color: 'transparent',
-          filter: 'drop-shadow(0 0 10px rgba(250,204,21,.7)) drop-shadow(0 1px 0 rgba(0,0,0,.5))',
+          filter: 'drop-shadow(0 1px 1px rgba(217,150,120,.35))',
         }}
         initial={false}
         animate={perfIn ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 6 }}

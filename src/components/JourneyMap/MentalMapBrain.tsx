@@ -15,19 +15,20 @@ import type { JourneyMapProps } from './types'
 import { flattenJourney, type BrainNode } from './brainModel'
 
 // ── palette ──────────────────────────────────────────────────────────────────
-const REGION = ['#22d3ee', '#ff2d95', '#a78bfa'] // lobe 0/1/2: cyan / magenta / violet
+const REGION = ['#46AEF7', '#FF8FCF', '#9B8CFF'] // lobe 0/1/2: sky / bubblegum / grape
 const RGB: Record<string, [number, number, number]> = {
-  '#22d3ee': [34, 211, 238],
-  '#ff2d95': [255, 45, 149],
-  '#a78bfa': [167, 139, 250],
+  '#46AEF7': [70, 174, 247],
+  '#FF8FCF': [255, 143, 207],
+  '#9B8CFF': [155, 140, 255],
 }
 const LIGHT: Record<string, string> = {
-  '#22d3ee': '#bff4ff',
-  '#ff2d95': '#ffc7e1',
-  '#a78bfa': '#e4dcff',
+  '#46AEF7': '#2E92DD',
+  '#FF8FCF': '#ED74BC',
+  '#9B8CFF': '#7E6DF0',
 }
-const STAR = '#facc15'
-const UNLIT: [number, number, number] = [44, 58, 104]
+const STAR = '#FFCE3A'
+// Unlit facets: a warm board-well tone so the brain mesh reads on light.
+const UNLIT: [number, number, number] = [251, 239, 230]
 const VIEW = { w: 360, h: 380 }
 
 // ── geometry (verbatim from the mockup) ──────────────────────────────────────
@@ -275,13 +276,13 @@ export function MentalMapBrain({ themes, onSelect }: JourneyMapProps) {
         @media (prefers-reduced-motion: reduce) { .mmb-next-ring { animation: none; } }
       `}</style>
 
-      <div className="relative overflow-hidden rounded-[22px] border-2 border-arcade-edge bg-[#04050c]">
+      <div className="relative overflow-hidden rounded-[22px] border-2 border-arcade-edge bg-vt-grid">
         {/* top chrome: wordmark + star total */}
         <div
           className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-between px-3 py-2"
-          style={{ background: 'linear-gradient(to bottom,#04050c,transparent)' }}
+          style={{ background: 'linear-gradient(to bottom,#FBEFE6,transparent)' }}
         >
-          <span className="font-pixel font-bold tracking-[0.05em] text-[10px] text-white text-glow-cyan">VANISHING TILES</span>
+          <span className="font-pixel font-bold tracking-[0.05em] text-[10px] text-vt-text">VANISHING TILES</span>
           <span className="font-pixel text-[9px] text-yellow-400" style={{ color: STAR }}>
             ★ {totalStars}
           </span>
@@ -317,17 +318,17 @@ export function MentalMapBrain({ themes, onSelect }: JourneyMapProps) {
                   key={i}
                   d={f.d}
                   fill={frgb(RGB[REGION[f.lobe]], 0.3 + 0.62 * f.sh)}
-                  stroke="#04050c"
-                  strokeOpacity={0.3}
+                  stroke="#FFFFFF"
+                  strokeOpacity={0.5}
                   strokeWidth={0.5}
                 />
               ) : (
                 <path
                   key={i}
                   d={f.d}
-                  fill={frgb(UNLIT, 0.55 * f.sh)}
-                  stroke="#9fb0e0"
-                  strokeOpacity={0.07}
+                  fill={frgb(UNLIT, Math.min(1, 0.78 + 0.22 * f.sh))}
+                  stroke="#E0C3AE"
+                  strokeOpacity={0.4}
                   strokeWidth={0.4}
                 />
               )
@@ -337,8 +338,8 @@ export function MentalMapBrain({ themes, onSelect }: JourneyMapProps) {
             <polygon
               points={OUTLINE.map((p) => p.join(',')).join(' ')}
               fill="none"
-              stroke="#aab8ff"
-              strokeOpacity={0.5}
+              stroke="#D9B89E"
+              strokeOpacity={0.7}
               strokeWidth={1.4}
             />
 
@@ -352,12 +353,12 @@ export function MentalMapBrain({ themes, onSelect }: JourneyMapProps) {
                   <g key={i}>
                     <line
                       x1={A[0]} y1={A[1]} x2={B[0]} y2={B[1]}
-                      stroke="#04050c" strokeOpacity={0.55} strokeWidth={2.8} strokeLinecap="round"
+                      stroke="#FFFFFF" strokeOpacity={0.8} strokeWidth={2.8} strokeLinecap="round"
                     />
                     <line
                       x1={A[0]} y1={A[1]} x2={B[0]} y2={B[1]}
                       stroke={LIGHT[REGION[HUB[b][2]]]} strokeOpacity={0.95} strokeWidth={1.3}
-                      strokeLinecap="round" filter="url(#mmbGlow)"
+                      strokeLinecap="round"
                     />
                   </g>
                 )
@@ -366,7 +367,7 @@ export function MentalMapBrain({ themes, onSelect }: JourneyMapProps) {
                 <line
                   key={i}
                   x1={A[0]} y1={A[1]} x2={B[0]} y2={B[1]}
-                  stroke="#9fb0e0" strokeOpacity={0.13} strokeWidth={0.8} strokeDasharray="1.5 4"
+                  stroke="#C9A98F" strokeOpacity={0.4} strokeWidth={0.8} strokeDasharray="1.5 4"
                 />
               )
             })}
@@ -389,7 +390,7 @@ export function MentalMapBrain({ themes, onSelect }: JourneyMapProps) {
 
                   {node.state === 'cleared' && (
                     <>
-                      <circle cx={x} cy={y} r={5.4} fill={color} filter="url(#mmbGlow)" />
+                      <circle cx={x} cy={y} r={5.4} fill={color} />
                       <circle cx={x} cy={y} r={2.4} fill="#fff" />
                     </>
                   )}
@@ -397,13 +398,13 @@ export function MentalMapBrain({ themes, onSelect }: JourneyMapProps) {
                     <>
                       <circle
                         className="mmb-next-ring"
-                        cx={x} cy={y} r={7} fill="none" stroke="#fff" strokeWidth={2}
+                        cx={x} cy={y} r={7} fill="none" stroke={color} strokeWidth={2}
                       />
-                      <circle cx={x} cy={y} r={4.4} fill="#fff" filter="url(#mmbGlow)" />
+                      <circle cx={x} cy={y} r={4.4} fill="#fff" stroke={color} strokeWidth={1.4} />
                     </>
                   )}
                   {node.state === 'ghost' && (
-                    <circle cx={x} cy={y} r={3} fill="#aeb9da" fillOpacity={0.3} />
+                    <circle cx={x} cy={y} r={3} fill="#C9A98F" fillOpacity={0.45} />
                   )}
 
                   {showLabel && (
@@ -438,7 +439,7 @@ export function MentalMapBrain({ themes, onSelect }: JourneyMapProps) {
         </div>
 
         {/* level-of-detail pill */}
-        <div className="pointer-events-none absolute bottom-2 left-2 z-20 rounded bg-black/50 px-2 py-1 text-[11px] text-gray-400">
+        <div className="pointer-events-none absolute bottom-2 left-2 z-20 rounded bg-white/80 px-2 py-1 text-[11px] text-vt-dim shadow-vt-tile">
           {lod}
         </div>
       </div>
@@ -489,8 +490,8 @@ function NodeLabel({
         width={chipW}
         height={chipH}
         rx={3}
-        fill="#080c1aee"
-        stroke={isNext ? '#ffffffaa' : `${color}88`}
+        fill="#FFFFFFF2"
+        stroke={isNext ? color : `${color}88`}
         strokeWidth={0.7}
       />
       <text
@@ -500,7 +501,7 @@ function NodeLabel({
         fontWeight={700}
         fontSize={fontSize}
         dominantBaseline="central"
-        fill={isNext ? '#ffffff' : '#dbe2ff'}
+        fill="#46383B"
       >
         {label}
       </text>
@@ -524,7 +525,7 @@ function ZoomBtn({ label, onClick }: { label: string; onClick: () => void }) {
     <button
       type="button"
       onClick={onClick}
-      className="font-pixel select-none rounded-lg border border-arcade-edge bg-[#111934cc] px-2.5 py-2 text-[9px] text-gray-200 hover:bg-[#182250] active:translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+      className="font-pixel select-none rounded-lg border border-arcade-edge bg-white/90 px-2.5 py-2 text-[9px] text-vt-text shadow-vt-tile hover:bg-vt-filled active:translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-vt-cyan"
     >
       {label}
     </button>

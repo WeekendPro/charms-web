@@ -28,29 +28,28 @@ export function ArcadeLoader({ active, delay = 120 }: { active: boolean; delay?:
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-5"
       style={{
         background:
-          'radial-gradient(120% 80% at 50% 50%, rgba(3,7,18,0.72), rgba(3,7,18,0.94))',
+          'radial-gradient(120% 80% at 50% 50%, rgba(255,247,240,0.82), rgba(251,239,230,0.94))',
       }}
     >
       <div
-        className="flex gap-[5px] p-[7px] rounded-md border-2"
+        className="flex gap-[5px] p-[7px] rounded-2xl border"
         style={{
-          borderColor: '#0e2b33',
-          background: '#060d12',
-          boxShadow: 'inset 0 0 14px rgba(0,0,0,0.6)',
+          borderColor: '#F0E0D4',
+          background: '#FFFFFF',
+          boxShadow: '0 6px 14px rgba(217,150,120,.22)',
         }}
       >
         {Array.from({ length: SEGMENTS }, (_, i) => (
           <span
             key={i}
-            className="arcade-seg block w-[14px] h-[30px] rounded-[2px]"
-            style={{ backgroundColor: '#0c1f25', animationDelay: `${i * 0.12}s` }}
+            className="arcade-seg block w-[14px] h-[30px] rounded-[4px]"
+            style={{ backgroundColor: '#FFF1E8', animationDelay: `${i * 0.12}s` }}
           />
         ))}
       </div>
 
       <div
-        className="font-pixel text-[11px] tracking-[0.06em] text-cyan-300"
-        style={{ textShadow: '0 0 8px rgba(34,211,238,0.6)' }}
+        className="font-pixel text-[11px] tracking-[0.06em] text-vt-cyan"
       >
         LOADING
       </div>

@@ -46,27 +46,27 @@ export function GameShell() {
   const centerContent = phase === 'countdown' || phase === 'briefing'
 
   return (
-    <div className="min-h-dvh bg-arcade-bg text-white flex flex-col">
+    <div className="min-h-dvh bg-arcade-glow text-vt-text flex flex-col">
       {isBriefing ? (
         // Instruction page: a back button to the level hub (← level name).
         <div className="px-5 pt-5 pb-1">
           <button
             onClick={() => { if (gitTrack) backToMap(); else if (levelId) openLevel(levelId) }}
-            className="text-neon-cyan text-glow-cyan text-sm font-semibold hover:opacity-80"
+            className="text-neon-cyan text-sm font-semibold hover:opacity-80"
           >
             ← {gitTrack ? 'Git Map' : (levelName ?? 'Back')}
           </button>
         </div>
       ) : (
         <>
-          <div className="sticky top-0 z-30 bg-arcade-bg flex items-center gap-4 pl-4 pr-12 h-[52px] border-b-2 border-arcade-edge">
+          <div className="sticky top-0 z-30 bg-vt-void flex items-center gap-4 pl-4 pr-12 h-[52px] border-b-2 border-arcade-edge">
             <span className="font-pixel text-[8px] uppercase tracking-normal text-neon-cyan leading-relaxed">
               {mode === 'journey' ? (
                 gitTrack ? (
                   // Git Map: just the track + node, e.g. "THE CLASSIC | LEVEL 14".
                   <>
-                    <strong className="text-white whitespace-nowrap">{GIT_TRACKS[gitTrack].label}</strong>
-                    <span className="text-zinc-500 whitespace-nowrap">
+                    <strong className="text-vt-text whitespace-nowrap">{GIT_TRACKS[gitTrack].label}</strong>
+                    <span className="text-vt-dim whitespace-nowrap">
                       <span className="text-arcade-edge px-1.5" aria-hidden>|</span>
                       Level {levelDisplayNumber ?? gitTrack}
                     </span>
@@ -75,11 +75,11 @@ export function GameShell() {
                   // Level hub: lead with the puzzle, e.g. "CHROMATIC @ BRICKFALL | LEVEL 6".
                   // Segments stay unbreakable so a long combo wraps cleanly at "@"/"|".
                   <>
-                    {activeComponent && <strong className="text-white whitespace-nowrap">{COMPONENT_LABEL[activeComponent]}</strong>}
+                    {activeComponent && <strong className="text-vt-text whitespace-nowrap">{COMPONENT_LABEL[activeComponent]}</strong>}
                     <span className="text-arcade-edge px-1.5" aria-hidden>@</span>
                     <span className="whitespace-nowrap">{levelName ?? `Level ${levelDisplayNumber ?? ''}`}</span>
                     {levelDisplayNumber != null && (
-                      <span className="text-zinc-500 whitespace-nowrap">
+                      <span className="text-vt-dim whitespace-nowrap">
                         <span className="text-arcade-edge px-1.5" aria-hidden>|</span>
                         Level {levelDisplayNumber}
                       </span>
@@ -87,7 +87,7 @@ export function GameShell() {
                   </>
                 )
               ) : (
-                <>ROUND <strong className="text-white">{roundIndex + 1} / 4</strong></>
+                <>ROUND <strong className="text-vt-text">{roundIndex + 1} / 4</strong></>
               )}
             </span>
             <span className="flex-1" />
@@ -101,7 +101,7 @@ export function GameShell() {
               <ProgressBar
                 startTime={phaseStartTime}
                 duration={phaseDuration}
-                color={phase === 'viewing' ? 'bg-cyan-400' : 'bg-green-400'}
+                color={phase === 'viewing' ? 'bg-neon-cyan' : 'bg-neon-green'}
                 rounded="rounded-none"
               />
             ) : null}

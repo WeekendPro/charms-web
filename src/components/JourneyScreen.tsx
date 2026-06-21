@@ -16,18 +16,18 @@ function LegendItem({ variant, label }: { variant: 'complete' | 'current' | 'loc
   return (
     <span className="flex items-center gap-1.5">
       {variant === 'locked' ? (
-        <LockIcon size={13} color="#cbd5e1" />
+        <LockIcon size={13} color="#CDBFC1" />
       ) : (
         <span
           aria-hidden="true"
           className={`block h-3 w-3 rounded-full border-2${variant === 'current' ? ' map-next' : ''}`}
           style={{
-            borderColor: '#e5e7eb',
-            background: variant === 'complete' ? '#e5e7eb' : '#ffffff',
+            borderColor: '#F0E0D4',
+            background: variant === 'complete' ? '#9B8B8E' : '#ffffff',
           }}
         />
       )}
-      <span className="text-[11px] text-gray-300">{label}</span>
+      <span className="text-[11px] text-vt-dim">{label}</span>
     </span>
   )
 }
@@ -63,24 +63,24 @@ export function JourneyScreen() {
 
   if (error) {
     return (
-      <div className="min-h-dvh bg-gray-950 text-white flex flex-col items-center justify-center gap-4">
-        <p className="text-gray-400">Couldn't load the journey.</p>
-        <button onClick={load} className="px-6 py-3 rounded-xl bg-blue-700 hover:bg-blue-600 font-bold">Retry</button>
+      <div className="min-h-dvh bg-arcade-glow text-vt-text flex flex-col items-center justify-center gap-4">
+        <p className="text-vt-dim">Couldn't load the journey.</p>
+        <button onClick={load} className="px-6 py-3 rounded-xl bg-vt-cyan text-white hover:opacity-90 font-bold shadow-vt-tile">Retry</button>
       </div>
     )
   }
 
   if (!themes) {
-    return <div className="min-h-dvh bg-gray-950" />
+    return <div className="min-h-dvh bg-arcade-glow" />
   }
 
   return (
-    <div className="min-h-dvh bg-arcade-bg text-white arcade-scanlines">
+    <div className="min-h-dvh bg-arcade-glow text-vt-text arcade-scanlines">
       <div className="sticky top-0 z-20 flex h-[52px] items-center justify-between px-4"
-           style={{ background: 'linear-gradient(to bottom, #06080f, transparent)' }}>
+           style={{ background: 'linear-gradient(to bottom, #FFF7F0, transparent)' }}>
         <Wordmark size="sm" className="relative top-[2px]" />
         {themes.length > 0 && themes.every(t => t.levels.every(l => l.cleared)) && (
-          <span className="text-[11px] font-bold tracking-wide text-emerald-400">
+          <span className="text-[11px] font-bold tracking-wide text-vt-lime">
             Journey cleared
           </span>
         )}
@@ -97,7 +97,7 @@ export function JourneyScreen() {
       {mapStyle !== 'git' && (
         <div
           className="sticky bottom-0 z-20 flex justify-center px-4 pb-3 pt-6"
-          style={{ background: 'linear-gradient(to top, #06080f 70%, transparent)' }}
+          style={{ background: 'linear-gradient(to top, #FFF7F0 70%, transparent)' }}
         >
           <div className="flex items-center justify-center gap-5 rounded-full border-2 border-arcade-edge bg-arcade-panel px-5 py-2 shadow-panel-inset">
             <LegendItem variant="complete" label="Complete" />

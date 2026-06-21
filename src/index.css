@@ -21,11 +21,11 @@ body {
    gap travelling across the row when each cell is staggered via animation-delay. */
 @keyframes arcadeSeg {
   0%, 70% {
-    background-color: #22d3ee;
-    box-shadow: 0 0 8px #22d3ee, inset 0 0 2px rgba(255, 255, 255, 0.8);
+    background-color: #46AEF7;
+    box-shadow: 0 2px 6px rgba(70, 174, 247, 0.4);
   }
   71%, 100% {
-    background-color: #0c1f25;
+    background-color: #FFF1E8;
     box-shadow: none;
   }
 }
@@ -89,7 +89,7 @@ body {
 }
 .map-next {
   animation: mapPulse 1.3s ease-in-out infinite;
-  box-shadow: 0 0 8px #fff, 0 0 14px #ff2d95;
+  box-shadow: 0 0 0 4px rgba(255, 143, 207, 0.35), 0 2px 8px rgba(255, 143, 207, 0.55);
 }
 
 /* Cleared-route draw-on: sweep a line's stroke into view from its start.

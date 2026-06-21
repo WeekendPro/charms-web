@@ -19,7 +19,7 @@ interface Props {
 function RejectMark() {
   return (
     <span aria-label="rejected piece" className="flex items-center justify-center pointer-events-none mb-0.5">
-      <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="#ef4444"
+      <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="#FF6B81"
            strokeWidth={4} strokeLinecap="round">
         <line x1="5" y1="5" x2="19" y2="19" />
         <line x1="19" y1="5" x2="5" y2="19" />
@@ -66,7 +66,7 @@ export const SelectionCart = forwardRef<SelectionCartHandle, Props>(
           )
         })}
         {slots.length === 0 && (
-          <span className="text-xs text-gray-600 italic">No pieces</span>
+          <span className="text-xs text-vt-dim italic">No pieces</span>
         )}
       </div>
     )
