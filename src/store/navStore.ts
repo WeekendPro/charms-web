@@ -1,12 +1,12 @@
 import { create } from 'zustand'
 
-export type AppView = 'auth' | 'home' | 'stagger'
+export type AppView = 'auth' | 'home' | 'game'
 
 interface NavState {
   appView: AppView
   goAuth: () => void
   goHome: () => void
-  goStagger: () => void
+  goGame: () => void
   reset: () => void
 }
 
@@ -18,6 +18,6 @@ export const useNavStore = create<NavState>((set) => ({
   ...INITIAL,
   goAuth: () => set({ appView: 'auth' }),
   goHome: () => set({ appView: 'home' }),
-  goStagger: () => set({ appView: 'stagger' }),
+  goGame: () => set({ appView: 'game' }),
   reset: () => set({ ...INITIAL }),
 }))
