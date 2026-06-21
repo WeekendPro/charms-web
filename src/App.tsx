@@ -7,6 +7,11 @@ import { HomeScreen } from './components/HomeScreen'
 import { StaggerScreen } from './components/StaggerScreen'
 import { GlobalLoadingOverlay } from './components/GlobalLoadingOverlay'
 import { GlobalMenu } from './components/GlobalMenu'
+import { CharmsDemo } from './components/charms/CharmsDemo'
+
+// Dev gallery for the Charms × Sherbet component library, reached at `#charms`.
+// Additive and self-contained — it never touches the auth/game flow below.
+const isCharmsDemo = typeof window !== 'undefined' && window.location.hash.replace(/^#\/?/, '') === 'charms'
 
 export default function App() {
   const { appView, goAuth, goHome } = useNavStore(useShallow(s => ({
@@ -16,6 +21,7 @@ export default function App() {
   })))
 
   useEffect(() => {
+    if (isCharmsDemo) return
     let cancelled = false
     getSession()
       .then(({ data }) => {
@@ -26,6 +32,8 @@ export default function App() {
       .catch(() => { if (!cancelled) goAuth() })
     return () => { cancelled = true }
   }, [goAuth, goHome])
+
+  if (isCharmsDemo) return <CharmsDemo />
 
   const view = (() => {
     switch (appView) {
