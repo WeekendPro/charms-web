@@ -27,6 +27,9 @@ export interface CharmProps {
   state?: CharmState
   /** Stagger index — delays settle/slip by `index × staggerMs` for wave motion. */
   index?: number
+  /** When set, draws a draining border-timer ring that empties over this many ms
+   *  (used in Glimpse: each charm counts down on its own rim, then slips away). */
+  timerMs?: number
   className?: string
   style?: CSSProperties
 }
@@ -45,6 +48,7 @@ export function Charm({
   size = 64,
   state = 'idle',
   index = 0,
+  timerMs,
   className = '',
   style,
 }: CharmProps) {
@@ -114,6 +118,17 @@ export function Charm({
         </span>
         {state === 'slipping' && <span className="charm-shimmer" aria-hidden />}
       </span>
+      {timerMs != null && state !== 'slipping' && (
+        <svg
+          className="charm-ring"
+          viewBox="0 0 100 100"
+          style={{ width: '100%', height: '100%', '--ring-ms': `${timerMs}ms` } as CSSProperties}
+          aria-hidden
+        >
+          <circle className="charm-ring-track" cx="50" cy="50" r="46" />
+          <circle className="charm-ring-fg" cx="50" cy="50" r="46" />
+        </svg>
+      )}
     </motion.div>
   )
 }

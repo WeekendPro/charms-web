@@ -60,6 +60,10 @@ export const MOTION = {
   settleMs: 500,
   slipMs: 1600,
   staggerMs: 80,
+  /** Glimpse: charms arrive one at a time, this far apart (old Phosphor REVEAL_STEP_MS). */
+  glimpseStepMs: 1120,
+  /** Glimpse: each charm's on-screen window + border-timer drain (old Phosphor REVEAL_BLOOM_MS). */
+  glimpseBloomMs: 2080,
   /** Springy entrance: stiffness ~260, damping ~18 (overshoot then settle). */
   spring: { type: 'spring', stiffness: 260, damping: 18 } as const,
 } as const

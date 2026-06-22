@@ -49,8 +49,10 @@ countdown → glimpse → find → resolved → (next round) countdown → …
 Phases: `'idle' | 'countdown' | 'glimpse' | 'find' | 'resolved' | 'gameOver'`.
 
 - **countdown** — `3 · 2 · 1 · Go` centered inside the empty Case; HUD inert (~850 ms/beat).
-- **glimpse** — the round's target Charms `settling` into their Settings; a fixed Glimpse timer drains; on
-  expiry they `slip away` and advance to `find`. **No skip button** — pure, fixed-duration memorize.
+- **glimpse** — the round's target Charms arrive **one at a time** (staggered), each `settling` into its
+  Setting with a draining **border-timer** on its rim; when a charm's timer empties it `slips away`. Find
+  begins once the last charm has slipped. **No skip button** — pure memorize. (Per-charm timings reuse the old
+  Phosphor reveal curve: `MOTION.glimpseStepMs` between arrivals, `MOTION.glimpseBloomMs` on screen each.)
 - **find** — the Tray appears; the FindBar shows the combo meter + a teal→amber→coral clock. The player taps
   the Charms they remember.
 - **resolved** — a brief (~1.1 s) all-✓ celebratory beat on the cleared Case, then the next, harder round's
