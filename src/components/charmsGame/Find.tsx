@@ -12,9 +12,9 @@ function fmt(ms: number) {
 /** Recall phase: tap the charms you saw from the Tray, against the clock. */
 export function Find() {
   const {
-    score, lives, roundIndex, combo, config, targets, tray, findStartedAt, pickTray, findTimeout,
+    score, lives, roundIndex, streak, config, targets, tray, findStartedAt, pickTray, findTimeout,
   } = useCharmsGameStore(useShallow(s => ({
-    score: s.score, lives: s.lives, roundIndex: s.roundIndex, combo: s.combo, config: s.config,
+    score: s.score, lives: s.lives, roundIndex: s.roundIndex, streak: s.streak, config: s.config,
     targets: s.targets, tray: s.tray, findStartedAt: s.findStartedAt, pickTray: s.pickTray, findTimeout: s.findTimeout,
   })))
   const [remaining, setRemaining] = useState(config.findMs)
@@ -36,7 +36,7 @@ export function Find() {
   return (
     <>
       <HUD score={score} label={`Round ${roundIndex + 1}`} lives={lives} />
-      <FindBar combo={Math.max(1, combo)} comboFill={fraction} clockLabel={fmt(remaining)} fractionRemaining={fraction} />
+      <FindBar streak={Math.max(1, streak)} streakFill={fraction} clockLabel={fmt(remaining)} fractionRemaining={fraction} />
       <Case>
         {Array.from({ length: CASE_SETTINGS }).map((_, k) => {
           const ch = bySetting.get(k)

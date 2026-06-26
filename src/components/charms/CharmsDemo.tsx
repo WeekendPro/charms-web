@@ -229,7 +229,7 @@ function FindScreen() {
   return (
     <>
       <HUD score={1480} label="Round 3" lives={2} />
-      <FindBar combo={3} comboFill={0.72} clockLabel="0:08" fractionRemaining={0.4} />
+      <FindBar streak={3} streakFill={0.72} clockLabel="0:08" fractionRemaining={0.4} />
       <Case>
         {Array.from({ length: 25 }).map((_, k) => {
           const good = k === 1 ? { hue: 'strawberry' as CharmHue, m: '🍓' } : k === 7 ? { hue: 'sky' as CharmHue, m: '💧' } : null
@@ -257,7 +257,7 @@ function FindScreen() {
         </Tray>
       </div>
       <div style={{ textAlign: 'center', color: SHERBET.inkSoft, fontSize: 13, fontWeight: 600, marginTop: 14 }}>
-        Two found — <b style={{ color: SHERBET.success }}>nice eye!</b> Keep the combo going…
+        Two found — <b style={{ color: SHERBET.success }}>nice eye!</b> Keep the streak going…
       </div>
     </>
   )
@@ -269,7 +269,7 @@ function GameOverScreen() {
   return (
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '28px 10px 0', background: 'radial-gradient(120% 80% at 50% 0%,#FFF4E9 0%,#FFEFE0 55%,#FFE8D6 100%)', margin: '-18px -16px -26px', paddingBottom: 26 }}>
       <div style={{ marginTop: 18, marginBottom: 18 }}><Charm hue="bubblegum" motif="🍓" size={108} /></div>
-      <h1 style={{ fontFamily: "'Fredoka'", fontWeight: 700, fontSize: 34, margin: '0 0 4px', background: `linear-gradient(90deg,${SHERBET.comboA},${SHERBET.comboB})`, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>Lovely run!</h1>
+      <h1 style={{ fontFamily: "'Fredoka'", fontWeight: 700, fontSize: 34, margin: '0 0 4px', background: `linear-gradient(90deg,${SHERBET.streakA},${SHERBET.streakB})`, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>Lovely run!</h1>
       <p style={{ color: SHERBET.inkSoft, fontWeight: 600, fontSize: 15, margin: '0 0 18px' }}>You found 14 charms — sweet memory.</p>
       <div style={{ width: '100%', padding: '0 12px' }}>
         <ScorePanel score={2140} stars={2}>

@@ -42,8 +42,8 @@ export const SHERBET = {
   success: '#2FD09B',
   life: '#FF6B81',
   star: '#FFCE3A',
-  comboA: '#FF6B6B',
-  comboB: '#FFA94D',
+  streakA: '#FF6B6B',
+  streakB: '#FFA94D',
   timer: { calm: '#46C7B6', warn: '#FFB13C', hot: '#FF8A5B' },
 } as const
 

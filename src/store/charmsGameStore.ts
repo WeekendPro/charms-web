@@ -89,14 +89,18 @@ interface CharmsGameState {
   roundsCleared: number
   score: number
   lives: number
-  combo: number
-  bestCombo: number
+  streak: number
+  bestStreak: number
   config: RoundConfig
   targets: PlacedCharm[]
   tray: TrayItem[]
   findStartedAt: number
   foundThisRun: number
   earnedKeys: string[]
+  /** Speed bonus awarded on the most recent round-clear — replayed by the Resolved drain. */
+  lastSpeedBonus: number
+  /** Find-clock fraction remaining at the most recent clear (0–1) — the drain bar's start fill. */
+  clearFraction: number
 
   startRun: (difficulty: Difficulty) => void
   beginGlimpse: () => void
@@ -114,14 +118,16 @@ const IDLE = {
   roundsCleared: 0,
   score: 0,
   lives: START_LIVES,
-  combo: 0,
-  bestCombo: 0,
+  streak: 0,
+  bestStreak: 0,
   config: roundConfig('easy', 0),
   targets: [] as PlacedCharm[],
   tray: [] as TrayItem[],
   findStartedAt: 0,
   foundThisRun: 0,
   earnedKeys: [] as string[],
+  lastSpeedBonus: 0,
+  clearFraction: 0,
 }
 
 function commitBracelet(keys: string[]) {
@@ -153,25 +159,28 @@ export const useCharmsGameStore = create<CharmsGameState>((set, get) => ({
       const lives = st.lives - 1
       if (lives <= 0) {
         commitBracelet(st.earnedKeys)
-        set({ lives: 0, combo: 0, tray: spendTray(key), phase: 'gameOver' })
+        set({ lives: 0, streak: 0, tray: spendTray(key), phase: 'gameOver' })
         return { ok: false, gameOver: true, roundCleared: false }
       }
-      set({ lives, combo: 0, tray: spendTray(key) })
+      set({ lives, streak: 0, tray: spendTray(key) })
       return { ok: false, gameOver: false, roundCleared: false }
     }
 
     // Correct pick.
-    const combo = st.combo + 1
-    const score = st.score + pickScore(combo)
+    const streak = st.streak + 1
+    const score = st.score + pickScore(streak)
     const targets = st.targets.map(t => (t.key === key ? { ...t, found: true } : t))
     const earnedKeys = st.earnedKeys.includes(key) ? st.earnedKeys : [...st.earnedKeys, key]
     const cleared = targets.every(t => t.found)
 
     if (cleared) {
       const remaining = st.findStartedAt + st.config.findMs - Date.now()
+      const bonus = speedBonus(remaining, st.config.findMs)
+      const clearFraction = Math.max(0, Math.min(1, remaining / st.config.findMs))
       set({
-        combo, bestCombo: Math.max(st.bestCombo, combo),
-        score: score + speedBonus(remaining, st.config.findMs),
+        streak, bestStreak: Math.max(st.bestStreak, streak),
+        score: score + bonus,
+        lastSpeedBonus: bonus, clearFraction,
         targets, tray: spendTray(key), earnedKeys,
         foundThisRun: st.foundThisRun + 1,
         roundsCleared: st.roundsCleared + 1,
@@ -181,7 +190,7 @@ export const useCharmsGameStore = create<CharmsGameState>((set, get) => ({
     }
 
     set({
-      combo, bestCombo: Math.max(st.bestCombo, combo), score,
+      streak, bestStreak: Math.max(st.bestStreak, streak), score,
       targets, tray: spendTray(key), earnedKeys,
       foundThisRun: st.foundThisRun + 1,
     })
@@ -200,7 +209,7 @@ export const useCharmsGameStore = create<CharmsGameState>((set, get) => ({
     const roundIndex = st.roundIndex + 1
     const config = roundConfig(st.difficulty, roundIndex)
     const { targets, tray } = buildRound(config)
-    set({ roundIndex, config, targets, tray, combo: 0, foundThisRun: 0, phase: 'countdown' })
+    set({ roundIndex, config, targets, tray, streak: 0, foundThisRun: 0, lastSpeedBonus: 0, clearFraction: 0, phase: 'countdown' })
   },
 
   exit: () => set({ ...IDLE }),

@@ -27,7 +27,7 @@ export function GameOver() {
       <div style={{ marginTop: 18, marginBottom: 18 }}>
         <Charm hue="bubblegum" motif="🍓" size={108} state="settling" />
       </div>
-      <h1 style={{ fontFamily: "'Fredoka'", fontWeight: 700, fontSize: 34, margin: '0 0 4px', background: `linear-gradient(90deg,${SHERBET.comboA},${SHERBET.comboB})`, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
+      <h1 style={{ fontFamily: "'Fredoka'", fontWeight: 700, fontSize: 34, margin: '0 0 4px', background: `linear-gradient(90deg,${SHERBET.streakA},${SHERBET.streakB})`, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
         Lovely run!
       </h1>
       <p style={{ color: SHERBET.inkSoft, fontWeight: 600, fontSize: 15, margin: '0 0 18px' }}>

@@ -55,7 +55,7 @@ describe('roundConfig', () => {
 })
 
 describe('scoring', () => {
-  it('pickScore is 100 x combo', () => {
+  it('pickScore is 100 x streak', () => {
     expect(pickScore(1)).toBe(100)
     expect(pickScore(3)).toBe(300)
   })

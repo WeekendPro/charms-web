@@ -49,9 +49,9 @@ export function roundConfig(difficulty: Difficulty, roundIndex: number): RoundCo
   return { charmCount, decoyCount, glimpseMs, findMs }
 }
 
-/** Points for one correct pick at the given combo (streak length, >= 1). */
-export function pickScore(combo: number): number {
-  return 100 * Math.max(1, combo)
+/** Points for one correct pick at the given streak length (>= 1). */
+export function pickScore(streak: number): number {
+  return 100 * Math.max(1, streak)
 }
 
 /** Round-clear speed bonus: up to 300, by fraction of the Find clock left. */

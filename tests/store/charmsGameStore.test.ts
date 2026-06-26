@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { useCharmsGameStore, START_LIVES } from '../../src/store/charmsGameStore'
 import { useBraceletStore } from '../../src/store/braceletStore'
-import { roundConfig } from '../../src/lib/charmsRound'
+import { roundConfig, speedBonus } from '../../src/lib/charmsRound'
 
 const s = () => useCharmsGameStore.getState()
 
@@ -43,28 +43,28 @@ describe('charmsGameStore — setup', () => {
 })
 
 describe('charmsGameStore — picking', () => {
-  it('a correct pick bumps combo, scores 100 x combo, settles the charm', () => {
+  it('a correct pick bumps streak, scores 100 x streak, settles the charm', () => {
     const keys = intoFind('easy')
     const r1 = s().pickTray(keys[0])
     expect(r1.ok).toBe(true)
-    expect(s().combo).toBe(1)
+    expect(s().streak).toBe(1)
     expect(s().score).toBe(100)
     expect(s().targets.find(t => t.key === keys[0])!.found).toBe(true)
     expect(s().tray.find(t => t.key === keys[0])!.spent).toBe(true)
 
     s().pickTray(keys[1])
-    expect(s().combo).toBe(2)
+    expect(s().streak).toBe(2)
     expect(s().score).toBe(300) // 100 + 200
   })
 
-  it('a wrong pick costs a life, resets combo, spends the tray item', () => {
+  it('a wrong pick costs a life, resets streak, spends the tray item', () => {
     intoFind('easy')
     const decoy = s().tray.find(t => !t.isTarget)!.key
-    s().pickTray(s().targets[0].key) // combo 1
+    s().pickTray(s().targets[0].key) // streak 1
     const r = s().pickTray(decoy)
     expect(r.ok).toBe(false)
     expect(s().lives).toBe(START_LIVES - 1)
-    expect(s().combo).toBe(0)
+    expect(s().streak).toBe(0)
     expect(s().tray.find(t => t.key === decoy)!.spent).toBe(true)
   })
 
@@ -79,13 +79,27 @@ describe('charmsGameStore — picking', () => {
     expect(s().score).toBeGreaterThan(600)
   })
 
-  it('beginNextRound escalates to a harder round', () => {
+  it('a round-clear records the speed-bonus payout for the drain replay', () => {
+    const keys = intoFind('easy')
+    const cfg = roundConfig('easy', 0)
+    for (const k of keys) s().pickTray(k)
+    // Time is frozen at 0, so the whole Find clock remains: full bar, max bonus.
+    expect(s().clearFraction).toBe(1)
+    expect(s().lastSpeedBonus).toBe(speedBonus(cfg.findMs, cfg.findMs))
+    // score = base picks (600) + the captured bonus.
+    expect(s().score).toBe(600 + s().lastSpeedBonus)
+  })
+
+  it('beginNextRound escalates to a harder round and clears the payout', () => {
     const keys = intoFind('easy')
     for (const k of keys) s().pickTray(k)
+    expect(s().lastSpeedBonus).toBeGreaterThan(0)
     s().beginNextRound()
     expect(s().roundIndex).toBe(1)
     expect(s().phase).toBe('countdown')
-    expect(s().combo).toBe(0)
+    expect(s().streak).toBe(0)
+    expect(s().lastSpeedBonus).toBe(0)
+    expect(s().clearFraction).toBe(0)
     expect(s().targets.length).toBeGreaterThanOrEqual(keys.length)
   })
 })
